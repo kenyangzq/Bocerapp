@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.swift
+//  SignInViewController.swift
 //  BocerApp
 //
 //  Created by Dempsy on 6/22/16.
@@ -8,20 +8,21 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignInViewController: UIViewController {
 
-    
     private var mNavBar: UINavigationBar?
-    
+    @IBOutlet private weak var mNavItem: UINavigationItem!
     @IBOutlet private weak var phoneNumberTF: UITextField!
-    @IBOutlet private weak var resetPasswordTF: UITextField!
-    @IBOutlet private weak var nextStepBtn: UIButton!
+    @IBOutlet private weak var passwordTF: UITextField!
+    @IBOutlet private weak var signInBtn: UIButton!
+    @IBOutlet private weak var resetPasswordBtn: UIButton!
+
     private var phoneNumber: String?
-    private var newPassword: String?
+    private var password: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         
         //设置导航栏
@@ -30,7 +31,9 @@ class SignUpViewController: UIViewController {
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = nextStepBtn.backgroundColor
+        mNavBar?.backgroundColor = signInBtn.backgroundColor
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -38,16 +41,16 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
-        nextStepBtn.layer.cornerRadius = 10
+        //设置按键圆角
+        signInBtn.layer.cornerRadius = 10
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     //设置导航栏左侧按键的action
     @objc private func onCancel(){
         self.navigationController?.popViewControllerAnimated(true)
@@ -55,16 +58,15 @@ class SignUpViewController: UIViewController {
     
     //创建一个导航项
     private func onMakeNavitem()->UINavigationItem{
-        let navigationItem = UINavigationItem()
         let backBtn = UIBarButtonItem(title: "Back", style: .Plain,
-                                      target: self, action: #selector(SignUpViewController.onCancel))
+                                      target: self, action: #selector(SignInViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
-        navigationItem.title = "SIGN UP"
-        navigationItem.setLeftBarButtonItem(backBtn, animated: true)
-        navigationItem.setHidesBackButton(false, animated: true)
-        return navigationItem
+        mNavItem.title = "SIGN IN"
+        mNavItem.setLeftBarButtonItem(backBtn, animated: true)
+        return mNavItem
     }
     
+    //检测phone number和password的正确性
     private func checkValidation(number: String?, password: String?) -> Bool {
         if (number == nil || number == "") {
             let alertController = UIAlertController(title: "Alert",
@@ -98,34 +100,34 @@ class SignUpViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return false
         }
-        //TODO: 检查密码是否大于6位
         
         return true
+        
     }
     
-    @IBAction func nextBtnClicked(sender: UIButton) {
+    //设置Sign In Button的动作
+    @IBAction private func signInBtnClicked(sender: UIButton) {
         phoneNumber = phoneNumberTF.text
-        newPassword = resetPasswordTF.text
-        if (checkValidation(phoneNumber,password: newPassword)) {
-            //TODO: 将电话号码和新密码传入后端，并向电话号码发送验证码
+        password = passwordTF.text
+        if (checkValidation(phoneNumber, password: password)) {
+            //TODO: 询问用户名和密码匹不匹配
             
-            
-            
-            let sb = UIStoryboard(name: "Main", bundle: nil);
-            let vc = sb.instantiateViewControllerWithIdentifier("MessageVerificationViewController") as UIViewController
-            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
-    func mNumber()-> String {
+    @IBAction private func resetPassword(sender: UIButton) {
+        let sb = UIStoryboard(name: "Main", bundle: nil);
+        let vc = sb.instantiateViewControllerWithIdentifier("ResetPasswordViewController") as UIViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func mNumber() -> String {
         return phoneNumber!
     }
     
     func mPassword() -> String {
-        return newPassword!
+        return password!
     }
-    
-
     /*
     // MARK: - Navigation
 

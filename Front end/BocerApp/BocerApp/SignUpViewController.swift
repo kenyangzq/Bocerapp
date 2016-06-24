@@ -1,15 +1,16 @@
 //
-//  ResetPasswordViewController.swift
+//  SignUpViewController.swift
 //  BocerApp
 //
-//  Created by Dempsy on 6/23/16.
+//  Created by Dempsy on 6/22/16.
 //  Copyright © 2016 Dempsy. All rights reserved.
 //
 
 import UIKit
 
-class ResetPasswordViewController: UIViewController {
+class SignUpViewController: UIViewController {
 
+    
     private var mNavBar: UINavigationBar?
     
     @IBOutlet private weak var phoneNumberTF: UITextField!
@@ -20,7 +21,7 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         //设置导航栏
@@ -37,9 +38,11 @@ class ResetPasswordViewController: UIViewController {
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         nextStepBtn.layer.cornerRadius = 10
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,9 +57,9 @@ class ResetPasswordViewController: UIViewController {
     private func onMakeNavitem()->UINavigationItem{
         let navigationItem = UINavigationItem()
         let backBtn = UIBarButtonItem(title: "Back", style: .Plain,
-                                      target: self, action: #selector(ResetPasswordViewController.onCancel))
+                                      target: self, action: #selector(SignUpViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
-        navigationItem.title = "RESET PASSWORD"
+        navigationItem.title = "SIGN UP"
         navigationItem.setLeftBarButtonItem(backBtn, animated: true)
         navigationItem.setHidesBackButton(false, animated: true)
         return navigationItem
@@ -99,8 +102,8 @@ class ResetPasswordViewController: UIViewController {
         
         return true
     }
-
-    @IBAction func nextBtnClicked(sender: UIButton) {
+    
+    @IBAction private func nextBtnClicked(sender: UIButton) {
         phoneNumber = phoneNumberTF.text
         newPassword = resetPasswordTF.text
         if (checkValidation(phoneNumber,password: newPassword)) {
@@ -113,7 +116,7 @@ class ResetPasswordViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-  
+    
     func mNumber()-> String {
         return phoneNumber!
     }
@@ -122,6 +125,7 @@ class ResetPasswordViewController: UIViewController {
         return newPassword!
     }
     
+
     /*
     // MARK: - Navigation
 

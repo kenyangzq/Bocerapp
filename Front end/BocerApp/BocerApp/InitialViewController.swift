@@ -10,9 +10,9 @@ import UIKit
 
 class InitialViewController: UIViewController {
 
-    @IBOutlet weak var SignInBtn: UIButton!
+    @IBOutlet private weak var SignInBtn: UIButton!
     
-    @IBOutlet weak var SignUpBtn: UIButton!
+    @IBOutlet private weak var SignUpBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

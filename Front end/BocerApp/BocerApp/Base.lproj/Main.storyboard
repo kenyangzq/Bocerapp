@@ -78,7 +78,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rOS-RP-FlY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="110" id="0SC-Ak-qSZ"/>
+                            <constraint firstItem="rOS-RP-FlY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="110" id="0SC-Ak-qSZ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                            </constraint>
                             <constraint firstItem="wyU-9a-wPE" firstAttribute="top" secondItem="rOS-RP-FlY" secondAttribute="bottom" constant="100" id="EYf-Cu-Onc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wyU-9a-wPE" secondAttribute="trailing" constant="20" id="UyU-ZR-c2e"/>
                             <constraint firstItem="wyU-9a-wPE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="do1-Be-ALz"/>

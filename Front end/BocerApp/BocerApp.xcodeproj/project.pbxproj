@@ -110,11 +110,7 @@
 				2571C3F51D1A868600AC4042 /* Accessory Files */,
 				2571C3C91D1A867A00AC4042 /* ViewController.swift */,
 				2571C3CB1D1A867A00AC4042 /* Main.storyboard */,
-				2571C3F61D1A89E500AC4042 /* InitialViewController.swift */,
-				2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */,
-				2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */,
-				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
-				2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */,
+				2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */,
 			);
 			path = BocerApp;
 			sourceTree = "<group>";
@@ -146,6 +142,18 @@
 				2571C3D31D1A867A00AC4042 /* Info.plist */,
 			);
 			name = "Accessory Files";
+			sourceTree = "<group>";
+		};
+		2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3F61D1A89E500AC4042 /* InitialViewController.swift */,
+				2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */,
+				2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */,
+				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
+				2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */,
+			);
+			name = "Sign In/Sign Up";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
