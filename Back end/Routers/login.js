@@ -8,7 +8,7 @@ var user = require('../dataModel');
 var router = express.Router;
 
 
-router.get('/LOGIN',function(req,res,err){
+router.get('/login',function(req,res,err){
 
 })
 
