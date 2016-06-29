@@ -1,0 +1,544 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
+		2571C3CA1D1A867A00AC4042 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C91D1A867A00AC4042 /* ViewController.swift */; };
+		2571C3CD1D1A867A00AC4042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3CB1D1A867A00AC4042 /* Main.storyboard */; };
+		2571C3CF1D1A867A00AC4042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3CE1D1A867A00AC4042 /* Assets.xcassets */; };
+		2571C3D21D1A867A00AC4042 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */; };
+		2571C3DD1D1A867A00AC4042 /* BocerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3DC1D1A867A00AC4042 /* BocerAppTests.swift */; };
+		2571C3E81D1A867A00AC4042 /* BocerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3E71D1A867A00AC4042 /* BocerAppUITests.swift */; };
+		2571C3F71D1A89E500AC4042 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3F61D1A89E500AC4042 /* InitialViewController.swift */; };
+		2571C3F91D1A8F3400AC4042 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */; };
+		2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */; };
+		2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */; };
+		2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2571C3D91D1A867A00AC4042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2571C3BC1D1A867A00AC4042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2571C3C31D1A867A00AC4042;
+			remoteInfo = BocerApp;
+		};
+		2571C3E41D1A867A00AC4042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2571C3BC1D1A867A00AC4042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2571C3C31D1A867A00AC4042;
+			remoteInfo = BocerApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2571C3C71D1A867A00AC4042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2571C3C91D1A867A00AC4042 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2571C3CC1D1A867A00AC4042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2571C3CE1D1A867A00AC4042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2571C3D11D1A867A00AC4042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2571C3D31D1A867A00AC4042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2571C3D81D1A867A00AC4042 /* BocerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BocerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2571C3DC1D1A867A00AC4042 /* BocerAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BocerAppTests.swift; sourceTree = "<group>"; };
+		2571C3DE1D1A867A00AC4042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2571C3E31D1A867A00AC4042 /* BocerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BocerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2571C3E71D1A867A00AC4042 /* BocerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BocerAppUITests.swift; sourceTree = "<group>"; };
+		2571C3E91D1A867A00AC4042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2571C3F61D1A89E500AC4042 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageVerificationViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2571C3C11D1A867A00AC4042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3D51D1A867A00AC4042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3E01D1A867A00AC4042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2571C3BB1D1A867A00AC4042 = {
+			isa = PBXGroup;
+			children = (
+				2571C3C61D1A867A00AC4042 /* BocerApp */,
+				2571C3DB1D1A867A00AC4042 /* BocerAppTests */,
+				2571C3E61D1A867A00AC4042 /* BocerAppUITests */,
+				2571C3C51D1A867A00AC4042 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2571C3C51D1A867A00AC4042 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3C41D1A867A00AC4042 /* BocerApp.app */,
+				2571C3D81D1A867A00AC4042 /* BocerAppTests.xctest */,
+				2571C3E31D1A867A00AC4042 /* BocerAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2571C3C61D1A867A00AC4042 /* BocerApp */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3F51D1A868600AC4042 /* Accessory Files */,
+				2571C3C91D1A867A00AC4042 /* ViewController.swift */,
+				2571C3CB1D1A867A00AC4042 /* Main.storyboard */,
+				2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */,
+			);
+			path = BocerApp;
+			sourceTree = "<group>";
+		};
+		2571C3DB1D1A867A00AC4042 /* BocerAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3DC1D1A867A00AC4042 /* BocerAppTests.swift */,
+				2571C3DE1D1A867A00AC4042 /* Info.plist */,
+			);
+			path = BocerAppTests;
+			sourceTree = "<group>";
+		};
+		2571C3E61D1A867A00AC4042 /* BocerAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3E71D1A867A00AC4042 /* BocerAppUITests.swift */,
+				2571C3E91D1A867A00AC4042 /* Info.plist */,
+			);
+			path = BocerAppUITests;
+			sourceTree = "<group>";
+		};
+		2571C3F51D1A868600AC4042 /* Accessory Files */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3C71D1A867A00AC4042 /* AppDelegate.swift */,
+				2571C3CE1D1A867A00AC4042 /* Assets.xcassets */,
+				2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */,
+				2571C3D31D1A867A00AC4042 /* Info.plist */,
+			);
+			name = "Accessory Files";
+			sourceTree = "<group>";
+		};
+		2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3F61D1A89E500AC4042 /* InitialViewController.swift */,
+				2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */,
+				2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */,
+				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
+				2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */,
+			);
+			name = "Sign In/Sign Up";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2571C3C31D1A867A00AC4042 /* BocerApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2571C3EC1D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerApp" */;
+			buildPhases = (
+				2571C3C01D1A867A00AC4042 /* Sources */,
+				2571C3C11D1A867A00AC4042 /* Frameworks */,
+				2571C3C21D1A867A00AC4042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BocerApp;
+			productName = BocerApp;
+			productReference = 2571C3C41D1A867A00AC4042 /* BocerApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2571C3D71D1A867A00AC4042 /* BocerAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2571C3EF1D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerAppTests" */;
+			buildPhases = (
+				2571C3D41D1A867A00AC4042 /* Sources */,
+				2571C3D51D1A867A00AC4042 /* Frameworks */,
+				2571C3D61D1A867A00AC4042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2571C3DA1D1A867A00AC4042 /* PBXTargetDependency */,
+			);
+			name = BocerAppTests;
+			productName = BocerAppTests;
+			productReference = 2571C3D81D1A867A00AC4042 /* BocerAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2571C3E21D1A867A00AC4042 /* BocerAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2571C3F21D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerAppUITests" */;
+			buildPhases = (
+				2571C3DF1D1A867A00AC4042 /* Sources */,
+				2571C3E01D1A867A00AC4042 /* Frameworks */,
+				2571C3E11D1A867A00AC4042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2571C3E51D1A867A00AC4042 /* PBXTargetDependency */,
+			);
+			name = BocerAppUITests;
+			productName = BocerAppUITests;
+			productReference = 2571C3E31D1A867A00AC4042 /* BocerAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2571C3BC1D1A867A00AC4042 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Dempsy;
+				TargetAttributes = {
+					2571C3C31D1A867A00AC4042 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					2571C3D71D1A867A00AC4042 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2571C3C31D1A867A00AC4042;
+					};
+					2571C3E21D1A867A00AC4042 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 2571C3C31D1A867A00AC4042;
+					};
+				};
+			};
+			buildConfigurationList = 2571C3BF1D1A867A00AC4042 /* Build configuration list for PBXProject "BocerApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2571C3BB1D1A867A00AC4042;
+			productRefGroup = 2571C3C51D1A867A00AC4042 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2571C3C31D1A867A00AC4042 /* BocerApp */,
+				2571C3D71D1A867A00AC4042 /* BocerAppTests */,
+				2571C3E21D1A867A00AC4042 /* BocerAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2571C3C21D1A867A00AC4042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2571C3D21D1A867A00AC4042 /* LaunchScreen.storyboard in Resources */,
+				2571C3CF1D1A867A00AC4042 /* Assets.xcassets in Resources */,
+				2571C3CD1D1A867A00AC4042 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3D61D1A867A00AC4042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3E11D1A867A00AC4042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2571C3C01D1A867A00AC4042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2571C3F91D1A8F3400AC4042 /* SignInViewController.swift in Sources */,
+				2571C3F71D1A89E500AC4042 /* InitialViewController.swift in Sources */,
+				2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */,
+				2571C3CA1D1A867A00AC4042 /* ViewController.swift in Sources */,
+				2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */,
+				2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */,
+				2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3D41D1A867A00AC4042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2571C3DD1D1A867A00AC4042 /* BocerAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2571C3DF1D1A867A00AC4042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2571C3E81D1A867A00AC4042 /* BocerAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2571C3DA1D1A867A00AC4042 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2571C3C31D1A867A00AC4042 /* BocerApp */;
+			targetProxy = 2571C3D91D1A867A00AC4042 /* PBXContainerItemProxy */;
+		};
+		2571C3E51D1A867A00AC4042 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2571C3C31D1A867A00AC4042 /* BocerApp */;
+			targetProxy = 2571C3E41D1A867A00AC4042 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2571C3CB1D1A867A00AC4042 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2571C3CC1D1A867A00AC4042 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2571C3D11D1A867A00AC4042 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2571C3EA1D1A867A00AC4042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2571C3EB1D1A867A00AC4042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2571C3ED1D1A867A00AC4042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BocerApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2571C3EE1D1A867A00AC4042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BocerApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2571C3F01D1A867A00AC4042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BocerAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BocerApp.app/BocerApp";
+			};
+			name = Debug;
+		};
+		2571C3F11D1A867A00AC4042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BocerAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BocerApp.app/BocerApp";
+			};
+			name = Release;
+		};
+		2571C3F31D1A867A00AC4042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BocerAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BocerApp;
+			};
+			name = Debug;
+		};
+		2571C3F41D1A867A00AC4042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BocerAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BocerApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2571C3BF1D1A867A00AC4042 /* Build configuration list for PBXProject "BocerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2571C3EA1D1A867A00AC4042 /* Debug */,
+				2571C3EB1D1A867A00AC4042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2571C3EC1D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2571C3ED1D1A867A00AC4042 /* Debug */,
+				2571C3EE1D1A867A00AC4042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2571C3EF1D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2571C3F01D1A867A00AC4042 /* Debug */,
+				2571C3F11D1A867A00AC4042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2571C3F21D1A867A00AC4042 /* Build configuration list for PBXNativeTarget "BocerAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2571C3F31D1A867A00AC4042 /* Debug */,
+				2571C3F41D1A867A00AC4042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2571C3BC1D1A867A00AC4042 /* Project object */;
+}
