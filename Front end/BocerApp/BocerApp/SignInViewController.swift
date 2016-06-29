@@ -11,13 +11,16 @@ import UIKit
 class SignInViewController: UIViewController {
 
     private var mNavBar: UINavigationBar?
+    private let base = baseClass()
+    private let userInfo = UserInfo()
+    private let checkEmail = checkEmailForm()
     @IBOutlet private weak var mNavItem: UINavigationItem!
-    @IBOutlet private weak var phoneNumberTF: UITextField!
+    @IBOutlet private weak var emailTF: UITextField!
     @IBOutlet private weak var passwordTF: UITextField!
     @IBOutlet private weak var signInBtn: UIButton!
     @IBOutlet private weak var resetPasswordBtn: UIButton!
 
-    private var phoneNumber: String?
+    private var email: String?
     private var password: String?
     
     override func viewDidLoad() {
@@ -58,7 +61,7 @@ class SignInViewController: UIViewController {
     
     //创建一个导航项
     private func onMakeNavitem()->UINavigationItem{
-        let backBtn = UIBarButtonItem(title: "Back", style: .Plain,
+        let backBtn = UIBarButtonItem(title: "ㄑBack", style: .Plain,
                                       target: self, action: #selector(SignInViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
         mNavItem.title = "SIGN IN"
@@ -70,7 +73,7 @@ class SignInViewController: UIViewController {
     private func checkValidation(number: String?, password: String?) -> Bool {
         if (number == nil || number == "") {
             let alertController = UIAlertController(title: "Alert",
-                                                    message: "Phone Number cannot be empty", preferredStyle: .Alert)
+                                                    message: "Email address cannot be empty", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -86,15 +89,9 @@ class SignInViewController: UIViewController {
             return false
         }
         
-        var mNumFlag = true
-        for c in (number?.characters)! {
-            if ((c < "0") || (c > "9")) {
-                mNumFlag = false
-            }
-        }
-        if (mNumFlag == false) {
+        if (checkEmail.check(number) == false) {
             let alertController = UIAlertController(title: "Alert",
-                                                    message: "Incorrect phone number form", preferredStyle: .Alert)
+                                                    message: "Incorrect Email address form", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -107,11 +104,15 @@ class SignInViewController: UIViewController {
     
     //设置Sign In Button的动作
     @IBAction private func signInBtnClicked(sender: UIButton) {
-        phoneNumber = phoneNumberTF.text
+        email = emailTF.text
         password = passwordTF.text
-        if (checkValidation(phoneNumber, password: password)) {
+        if (checkValidation(email, password: password)) {
             //TODO: 询问用户名和密码匹不匹配
             
+            
+            
+            //TODO: 
+            self.base.cacheSetString("User Index", value: "NEED Value")
         }
     }
     
@@ -122,7 +123,7 @@ class SignInViewController: UIViewController {
     }
     
     func mNumber() -> String {
-        return phoneNumber!
+        return email!
     }
     
     func mPassword() -> String {

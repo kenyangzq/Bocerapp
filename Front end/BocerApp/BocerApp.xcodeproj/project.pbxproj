@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
-		2571C3CA1D1A867A00AC4042 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C91D1A867A00AC4042 /* ViewController.swift */; };
+		2571C3CA1D1A867A00AC4042 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C91D1A867A00AC4042 /* LaunchScreenViewController.swift */; };
 		2571C3CD1D1A867A00AC4042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3CB1D1A867A00AC4042 /* Main.storyboard */; };
 		2571C3CF1D1A867A00AC4042 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3CE1D1A867A00AC4042 /* Assets.xcassets */; };
 		2571C3D21D1A867A00AC4042 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */; };
@@ -19,6 +19,19 @@
 		2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */; };
 		2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */; };
 		2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */; };
+		25E7AB081D20FC8A00E8F314 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */; };
+		25E7AB0A1D20FCDE00E8F314 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB091D20FCDE00E8F314 /* UserStatus.swift */; };
+		25E7AB111D212AA100E8F314 /* baseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB101D212AA100E8F314 /* baseClass.swift */; };
+		25E7AB151D221F2A00E8F314 /* AvatarPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */; };
+		25E7AB171D224AD500E8F314 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E7AB161D224AD500E8F314 /* libsqlite3.0.tbd */; };
+		25E7AB201D224C5F00E8F314 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB1F1D224C5F00E8F314 /* MoreInfoViewController.swift */; };
+		25E7AB241D224D5400E8F314 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB211D224D5400E8F314 /* SQLiteDB.swift */; };
+		25E7AB251D224D5400E8F314 /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB221D224D5400E8F314 /* SQLTable.swift */; };
+		25E7AB261D224D5400E8F314 /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB231D224D5400E8F314 /* String-Extras.swift */; };
+		25E7AB291D224D8B00E8F314 /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 25E7AB271D224D5D00E8F314 /* data.db */; };
+		25E7AB2D1D23661900E8F314 /* checkEmailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */; };
+		25FDCB3C1D20C60600DD400E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCB3B1D20C60600DD400E /* UserInfo.swift */; };
+		25FDCB421D20CDE600DD400E /* StringMD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCB411D20CDE600DD400E /* StringMD5.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +54,7 @@
 /* Begin PBXFileReference section */
 		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2571C3C71D1A867A00AC4042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2571C3C91D1A867A00AC4042 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2571C3C91D1A867A00AC4042 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		2571C3CC1D1A867A00AC4042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2571C3CE1D1A867A00AC4042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2571C3D11D1A867A00AC4042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +70,20 @@
 		2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageVerificationViewController.swift; sourceTree = "<group>"; };
+		25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		25E7AB091D20FCDE00E8F314 /* UserStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
+		25E7AB101D212AA100E8F314 /* baseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = baseClass.swift; sourceTree = "<group>"; };
+		25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarPresentViewController.swift; sourceTree = "<group>"; };
+		25E7AB161D224AD500E8F314 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		25E7AB1F1D224C5F00E8F314 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
+		25E7AB211D224D5400E8F314 /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = ../sqlite3/SQLiteDB/SQLiteDB.swift; sourceTree = "<group>"; };
+		25E7AB221D224D5400E8F314 /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLTable.swift; path = ../sqlite3/SQLiteDB/SQLTable.swift; sourceTree = "<group>"; };
+		25E7AB231D224D5400E8F314 /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "../sqlite3/SQLiteDB/String-Extras.swift"; sourceTree = "<group>"; };
+		25E7AB271D224D5D00E8F314 /* data.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.db; path = ../sqlite3/data.db; sourceTree = "<group>"; };
+		25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = checkEmailForm.swift; sourceTree = "<group>"; };
+		25FDCB3B1D20C60600DD400E /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		25FDCB3D1D20CC8900DD400E /* BocerApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BocerApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		25FDCB411D20CDE600DD400E /* StringMD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringMD5.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E7AB171D224AD500E8F314 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +115,9 @@
 		2571C3BB1D1A867A00AC4042 = {
 			isa = PBXGroup;
 			children = (
+				25E7AB161D224AD500E8F314 /* libsqlite3.0.tbd */,
+				25E7AB271D224D5D00E8F314 /* data.db */,
+				25E7AB1E1D224B6F00E8F314 /* SQLiteDB */,
 				2571C3C61D1A867A00AC4042 /* BocerApp */,
 				2571C3DB1D1A867A00AC4042 /* BocerAppTests */,
 				2571C3E61D1A867A00AC4042 /* BocerAppUITests */,
@@ -108,8 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				2571C3F51D1A868600AC4042 /* Accessory Files */,
-				2571C3C91D1A867A00AC4042 /* ViewController.swift */,
+				2571C3C91D1A867A00AC4042 /* LaunchScreenViewController.swift */,
 				2571C3CB1D1A867A00AC4042 /* Main.storyboard */,
+				25FDCB411D20CDE600DD400E /* StringMD5.swift */,
+				25E7AB0B1D20FCF000E8F314 /* User Info */,
 				2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */,
 			);
 			path = BocerApp;
@@ -140,6 +173,9 @@
 				2571C3CE1D1A867A00AC4042 /* Assets.xcassets */,
 				2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */,
 				2571C3D31D1A867A00AC4042 /* Info.plist */,
+				25FDCB3D1D20CC8900DD400E /* BocerApp-Bridging-Header.h */,
+				25E7AB101D212AA100E8F314 /* baseClass.swift */,
+				25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */,
 			);
 			name = "Accessory Files";
 			sourceTree = "<group>";
@@ -150,10 +186,40 @@
 				2571C3F61D1A89E500AC4042 /* InitialViewController.swift */,
 				2571C3F81D1A8F3400AC4042 /* SignInViewController.swift */,
 				2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */,
-				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
+				25E7AB2E1D23757200E8F314 /* temproraily unnecessary */,
 				2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */,
 			);
 			name = "Sign In/Sign Up";
+			sourceTree = "<group>";
+		};
+		25E7AB0B1D20FCF000E8F314 /* User Info */ = {
+			isa = PBXGroup;
+			children = (
+				25FDCB3B1D20C60600DD400E /* UserInfo.swift */,
+				25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */,
+				25E7AB091D20FCDE00E8F314 /* UserStatus.swift */,
+			);
+			name = "User Info";
+			sourceTree = "<group>";
+		};
+		25E7AB1E1D224B6F00E8F314 /* SQLiteDB */ = {
+			isa = PBXGroup;
+			children = (
+				25E7AB211D224D5400E8F314 /* SQLiteDB.swift */,
+				25E7AB221D224D5400E8F314 /* SQLTable.swift */,
+				25E7AB231D224D5400E8F314 /* String-Extras.swift */,
+			);
+			name = SQLiteDB;
+			sourceTree = "<group>";
+		};
+		25E7AB2E1D23757200E8F314 /* temproraily unnecessary */ = {
+			isa = PBXGroup;
+			children = (
+				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
+				25E7AB1F1D224C5F00E8F314 /* MoreInfoViewController.swift */,
+				25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */,
+			);
+			name = "temproraily unnecessary";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +290,7 @@
 				TargetAttributes = {
 					2571C3C31D1A867A00AC4042 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = SJ32HF29L4;
 					};
 					2571C3D71D1A867A00AC4042 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -260,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E7AB291D224D8B00E8F314 /* data.db in Resources */,
 				2571C3D21D1A867A00AC4042 /* LaunchScreen.storyboard in Resources */,
 				2571C3CF1D1A867A00AC4042 /* Assets.xcassets in Resources */,
 				2571C3CD1D1A867A00AC4042 /* Main.storyboard in Resources */,
@@ -288,12 +356,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				2571C3F91D1A8F3400AC4042 /* SignInViewController.swift in Sources */,
+				25E7AB251D224D5400E8F314 /* SQLTable.swift in Sources */,
+				25E7AB201D224C5F00E8F314 /* MoreInfoViewController.swift in Sources */,
 				2571C3F71D1A89E500AC4042 /* InitialViewController.swift in Sources */,
 				2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */,
-				2571C3CA1D1A867A00AC4042 /* ViewController.swift in Sources */,
+				2571C3CA1D1A867A00AC4042 /* LaunchScreenViewController.swift in Sources */,
+				25FDCB3C1D20C60600DD400E /* UserInfo.swift in Sources */,
+				25FDCB421D20CDE600DD400E /* StringMD5.swift in Sources */,
+				25E7AB081D20FC8A00E8F314 /* PaymentInfo.swift in Sources */,
+				25E7AB261D224D5400E8F314 /* String-Extras.swift in Sources */,
+				25E7AB151D221F2A00E8F314 /* AvatarPresentViewController.swift in Sources */,
+				25E7AB2D1D23661900E8F314 /* checkEmailForm.swift in Sources */,
 				2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */,
+				25E7AB0A1D20FCDE00E8F314 /* UserStatus.swift in Sources */,
 				2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */,
+				25E7AB241D224D5400E8F314 /* SQLiteDB.swift in Sources */,
 				2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */,
+				25E7AB111D212AA100E8F314 /* baseClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,10 +514,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BocerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BocerApp/BocerApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -446,10 +531,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BocerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BocerApp/BocerApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
