@@ -10,7 +10,8 @@ import UIKit
 
 class MessageVerificationViewController: UIViewController {
 
-    private var phoneNumber: String = ""
+    private var base = baseClass()
+    private var email: String = ""
     private var verificationCode: String = ""
     private var mNavBar: UINavigationBar?
     @IBOutlet private weak var verificationCodeTF: UITextField!
@@ -81,10 +82,10 @@ class MessageVerificationViewController: UIViewController {
     
     private func onMakeNavitem()->UINavigationItem{
         let navItem = UINavigationItem()
-        let backBtn = UIBarButtonItem(title: "Back", style: .Plain,
+        let backBtn = UIBarButtonItem(title: "ㄑBack", style: .Plain,
                                       target: self, action: #selector(MessageVerificationViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
-        navItem.title = "SMS Verification"
+        navItem.title = "CODE VERIFICATION"
         navItem.setLeftBarButtonItem(backBtn, animated: true)
         return navItem
     }
@@ -99,8 +100,8 @@ class MessageVerificationViewController: UIViewController {
     }
     
     //从数据库获取电话号码
-    internal func setNumber(number:String) {
-        phoneNumber = number
+    internal func setEmail(mEmail:String) {
+        email = mEmail
     }
     
     //从数据库获取验证码
@@ -115,6 +116,14 @@ class MessageVerificationViewController: UIViewController {
     
     @IBAction private func finishClicked(sender: UIButton) {
         //TODO: 检测验证码是否正确
+        
+        
+        let faSign = base.cacheGetString("father for Message Verification")
+        if faSign == "SignUp" {
+            let sb = UIStoryboard(name: "Main", bundle: nil);
+            let vc = sb.instantiateViewControllerWithIdentifier("MoreInfoViewController") as UIViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     /*

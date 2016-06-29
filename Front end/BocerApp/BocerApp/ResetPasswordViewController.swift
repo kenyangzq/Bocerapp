@@ -11,12 +11,13 @@ import UIKit
 class ResetPasswordViewController: UIViewController {
 
     private var mNavBar: UINavigationBar?
-    
-    @IBOutlet private weak var phoneNumberTF: UITextField!
+    private var checkEmail = checkEmailForm()
+    @IBOutlet private weak var emailTF: UITextField!
     @IBOutlet private weak var resetPasswordTF: UITextField!
     @IBOutlet private weak var nextStepBtn: UIButton!
-    private var phoneNumber: String?
+    private var email: String?
     private var newPassword: String?
+    private var base = baseClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,7 @@ class ResetPasswordViewController: UIViewController {
     //创建一个导航项
     private func onMakeNavitem()->UINavigationItem{
         let navigationItem = UINavigationItem()
-        let backBtn = UIBarButtonItem(title: "Back", style: .Plain,
+        let backBtn = UIBarButtonItem(title: "ㄑBack", style: .Plain,
                                       target: self, action: #selector(ResetPasswordViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
         navigationItem.title = "RESET PASSWORD"
@@ -62,10 +63,61 @@ class ResetPasswordViewController: UIViewController {
         return navigationItem
     }
     
+    private func checkPwValidation(password: String) -> Bool{
+        
+        //检查密码是否长于6位
+        if password.characters.count < 6 {
+            let alertController = UIAlertController(title: "Alert",
+                                                    message: "Password must contain at least 6 characters.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        //检查密码是否包含数字
+        var haveDigits = false
+        for i in password.characters {
+            if (i>="0" && i<="9") {
+                haveDigits = true
+                break
+            }
+        }
+        if haveDigits == false {
+            let alertController = UIAlertController(title: "Alert",
+                                                    message: "Password must contain at least 1 digit.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        //检查密码是否只包含数字字母
+        var punctuations = true
+        for i in password.characters {
+            if (i>="0" && i<="9") {continue}
+            if (i>="a" && i<="z") {continue}
+            if (i>="A" && i<="Z") {continue}
+            if (i=="." || i=="_" || i=="-") {continue}
+            punctuations = false
+            break
+        }
+        if punctuations == false {
+            let alertController = UIAlertController(title: "Alert",
+                message: "Password cannot have punctuations other than '.', '_' and '-'.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        return true
+    }
+    
     private func checkValidation(number: String?, password: String?) -> Bool {
         if (number == nil || number == "") {
             let alertController = UIAlertController(title: "Alert",
-                                                    message: "Phone Number cannot be empty", preferredStyle: .Alert)
+                                                    message: "Email address cannot be empty.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -74,22 +126,16 @@ class ResetPasswordViewController: UIViewController {
         
         if (password == nil || password == "") {
             let alertController = UIAlertController(title: "Alert",
-                                                    message: "Password cannot be empty", preferredStyle: .Alert)
+                                                    message: "Password cannot be empty.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             return false
         }
         
-        var mNumFlag = true
-        for c in (number?.characters)! {
-            if ((c < "0") || (c > "9")) {
-                mNumFlag = false
-            }
-        }
-        if (mNumFlag == false) {
+        if (checkEmail.check(number) == false) {
             let alertController = UIAlertController(title: "Alert",
-                                                    message: "Incorrect phone number form", preferredStyle: .Alert)
+                                                    message: "Incorrect Email address form", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -97,17 +143,19 @@ class ResetPasswordViewController: UIViewController {
         }
         //TODO: 检查密码是否大于6位
         
-        return true
+        return checkPwValidation(password!)
     }
 
     @IBAction private func nextBtnClicked(sender: UIButton) {
-        phoneNumber = phoneNumberTF.text
+        email = emailTF.text
         newPassword = resetPasswordTF.text
-        if (checkValidation(phoneNumber,password: newPassword)) {
+        if (checkValidation(email,password: newPassword)) {
             //TODO: 将电话号码和新密码传入后端，并向电话号码发送验证码
             
             
-            
+            self.base.cacheSetString("father for Message Verification", value: "ResetPassword")
+            //TODO:
+            self.base.cacheSetString("User Index", value: "NEED VALUE")
             let sb = UIStoryboard(name: "Main", bundle: nil);
             let vc = sb.instantiateViewControllerWithIdentifier("MessageVerificationViewController") as UIViewController
             self.navigationController?.pushViewController(vc, animated: true)
@@ -115,7 +163,7 @@ class ResetPasswordViewController: UIViewController {
     }
   
     func mNumber()-> String {
-        return phoneNumber!
+        return email!
     }
     
     func mPassword() -> String {
