@@ -40,11 +40,6 @@ class UserInfo {
         base.cacheSetString("user last name", value: mLast)
     }
     
-    internal func setPhoneNumber(mPhoneNumber: String) {
-        phoneNumber = mPhoneNumber
-        base.cacheSetString("user phone number", value: mPhoneNumber)
-    }
-    
     internal func setEmail(mEmail: String) {
         email = mEmail
         base.cacheSetString("user email", value: mEmail)
@@ -56,29 +51,17 @@ class UserInfo {
         base.cacheSetString("user protected password", value: password!)
     }
     
-    internal func setCollege(mCollege: String) {
-        college = mCollege
-        base.cacheSetString("user college", value: mCollege)
-    }
-    
     internal func getName() -> (mFirst: String?, mLast: String?) {
         return (base.cacheGetString("user first name"), base.cacheGetString("user last name"))
-    }
-
-    
-    internal func getPhoneNumber() -> String? {
-        return base.cacheGetString("user phone number")
     }
     
     internal func getPassword() -> String? {
         return base.cacheGetString("user protected password")
     }
-    
-    internal func getCollege() -> String? {
-        return base.cacheGetString("college")
-    }
-    
 
+    internal func getEmail() -> String? {
+        return base.cacheGetString("user email")
+    }
     
     //TODO: Payment Info和Personal Status的设置
 }

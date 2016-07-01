@@ -8,16 +8,55 @@
 
 import UIKit
 
-class ResetPasswordViewController: UIViewController {
+class ResetPasswordViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate,NSURLConnectionDataDelegate {
 
     private var mNavBar: UINavigationBar?
     private var checkEmail = checkEmailForm()
     @IBOutlet private weak var emailTF: UITextField!
     @IBOutlet private weak var resetPasswordTF: UITextField!
-    @IBOutlet private weak var nextStepBtn: UIButton!
+    @IBOutlet private weak var resendBtn: UIButton!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
     private var email: String?
     private var newPassword: String?
+    private var firstName: String?
+    private var lastName: String?
+    private var imageString: String?
     private var base = baseClass()
+    private var countdownTimer: NSTimer?
+    private var dataChunk = NSMutableData()
+    
+    @objc private func updateTime(timer: NSTimer) {
+        remainingSeconds -= 1
+    }
+    
+    private var remainingSeconds: Int = 0 {
+        willSet {
+            resendBtn.setTitle("\(newValue)s", forState: .Disabled)
+            
+            if newValue <= 0 {
+                resendBtn.setTitle("Resend", forState: .Normal)
+                isCounting = false
+            }
+        }
+    }
+    
+    private var isCounting = false {
+        willSet {
+            if newValue {
+                countdownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:#selector(ResetPasswordViewController.updateTime(_:)), userInfo: nil, repeats: true)
+                remainingSeconds = 60
+                resendBtn.backgroundColor = UIColor.grayColor()
+            } else {
+                countdownTimer?.invalidate()
+                countdownTimer = nil
+                resendBtn.backgroundColor = UIColor(red: 102/255, green: 255/255, blue: 204/255, alpha: 1)            }
+            resendBtn.enabled = !newValue
+        }
+    }
+    
+    private func beginCounting() {
+        isCounting = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +69,7 @@ class ResetPasswordViewController: UIViewController {
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = nextStepBtn.backgroundColor
+        mNavBar?.backgroundColor = UIColor(red: 0, green: 128/255, blue: 128/255, alpha: 0)
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -38,9 +77,165 @@ class ResetPasswordViewController: UIViewController {
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        nextStepBtn.layer.cornerRadius = 10
+        resendBtn.layer.cornerRadius = 10
+        resendBtn.backgroundColor = UIColor(red: 102/255, green: 255/255, blue: 204/255, alpha: 1)
+        
+        //delegate textfield
+        emailTF.delegate = self
+        resetPasswordTF.delegate = self
+        
     }
 
+    @IBAction func viewClick(sender: AnyObject) {
+        emailTF.resignFirstResponder()
+        resetPasswordTF.resignFirstResponder()
+    }
+    
+    private func resendBtnPerformed() {
+        email = emailTF.text
+        newPassword = resetPasswordTF.text
+        if (checkValidation(email,password: newPassword)) {
+            beginCounting()
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "A verification link has been sent to your Email", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            //TODO: 将电话号码和新密码传入后端，并向电话号码发送验证码
+            let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"password\":\"%@\"}",email!,newPassword!)
+            let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
+            let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
+            let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/forgetPassword")
+            let request = NSMutableURLRequest()
+            request.URL = url
+            request.HTTPMethod = "POST"
+            request.setValue(dataLength as String, forHTTPHeaderField: "Content-Length")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = sent
+            
+            let conn = NSURLConnection(request: request, delegate: self, startImmediately: true)
+            indicator.alpha = 1
+            indicator.startAnimating()
+            if (conn == nil) {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Connection Failure.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func requestUserBasicInfo() {
+        let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
+        let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
+        let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
+        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/userbasicinfo")
+        let request = NSMutableURLRequest()
+        request.URL = url
+        request.HTTPMethod = "POST"
+        request.setValue(dataLength as String, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = sent
+        let conn = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        if (conn == nil) {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Connection Failure.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            print("cannot connect to the server\n")
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        dataChunk = NSMutableData()
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        dataChunk.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
+        let targetAction = backmsg.objectForKey("Target Action") as! String
+        let content = backmsg.objectForKey("content") as! String
+        indicator.stopAnimating()
+        indicator.alpha = 0
+        //普通登录
+        if targetAction == "forgetresult" {
+            if content == "success" {
+                //获取用户其他信息
+                requestUserBasicInfo()
+                
+                print("login success\n")
+            }
+            else if content == "not exist" {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Email does not exists", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                print("email does not exists")
+            } else {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Connection Failure.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                print("connection fails when trying email login")
+            }
+        }
+             //user info
+        else if targetAction == "userbasicinfo" {
+            if content == "fail" {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Server Issues.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                print("Server downs when trying to get user basic info\n")
+            } else {
+                firstName = backmsg.objectForKey("firstname") as! String?
+                lastName = backmsg.objectForKey("lastname") as! String?
+                imageString = backmsg.objectForKey("imagestring") as! String?
+                //TODO: 进入主界面
+                
+                print("fetched user basic info successfully\n")
+            }
+        } else {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Server Issues.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            print("unexpected server issues\n")
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        NSLog("%@", error)
+        indicator.stopAnimating()
+        indicator.alpha = 0
+        let alertController = UIAlertController(title: "Warning",
+                                                message: "Connection Failure.", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        NSLog("connection failed")
+        
+    }
+
+    @IBAction func resendBtnClicked(sender: UIButton) {
+        resendBtnPerformed()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,7 +262,7 @@ class ResetPasswordViewController: UIViewController {
         
         //检查密码是否长于6位
         if password.characters.count < 6 {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                                                     message: "Password must contain at least 6 characters.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -84,7 +279,7 @@ class ResetPasswordViewController: UIViewController {
             }
         }
         if haveDigits == false {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                                                     message: "Password must contain at least 1 digit.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -103,7 +298,7 @@ class ResetPasswordViewController: UIViewController {
             break
         }
         if punctuations == false {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                 message: "Password cannot have punctuations other than '.', '_' and '-'.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -116,7 +311,7 @@ class ResetPasswordViewController: UIViewController {
     
     private func checkValidation(number: String?, password: String?) -> Bool {
         if (number == nil || number == "") {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                                                     message: "Email address cannot be empty.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -125,7 +320,7 @@ class ResetPasswordViewController: UIViewController {
         }
         
         if (password == nil || password == "") {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                                                     message: "Password cannot be empty.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -134,7 +329,7 @@ class ResetPasswordViewController: UIViewController {
         }
         
         if (checkEmail.check(number) == false) {
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: "Warning",
                                                     message: "Incorrect Email address form", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
@@ -145,21 +340,15 @@ class ResetPasswordViewController: UIViewController {
         
         return checkPwValidation(password!)
     }
-
-    @IBAction private func nextBtnClicked(sender: UIButton) {
-        email = emailTF.text
-        newPassword = resetPasswordTF.text
-        if (checkValidation(email,password: newPassword)) {
-            //TODO: 将电话号码和新密码传入后端，并向电话号码发送验证码
-            
-            
-            self.base.cacheSetString("father for Message Verification", value: "ResetPassword")
-            //TODO:
-            self.base.cacheSetString("User Index", value: "NEED VALUE")
-            let sb = UIStoryboard(name: "Main", bundle: nil);
-            let vc = sb.instantiateViewControllerWithIdentifier("MessageVerificationViewController") as UIViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        resignFirstResponder()
+        if textField == emailTF {
+            resetPasswordTF.becomeFirstResponder()
+        } else {
+            resendBtnPerformed()
         }
+        return true
     }
   
     func mNumber()-> String {

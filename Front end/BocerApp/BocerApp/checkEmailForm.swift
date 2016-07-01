@@ -19,7 +19,8 @@ class checkEmailForm {
         }
         if flag != 1 {return false}
         
-        let t = email?.rangeOfString("@")
+        var t = email?.rangeOfString("@")
+        if t!.startIndex==email?.startIndex {return false}
         let domain = email?.substringFromIndex(t!.startIndex.successor())
         flag = 0
         for c in(domain?.characters)! {
@@ -29,6 +30,8 @@ class checkEmailForm {
             }
         }
         if flag != 1 {return false}
+        t = domain?.rangeOfString(".")
+        if (t?.startIndex == domain?.startIndex || t?.endIndex == domain?.endIndex) {return false}
         return true
     }
 }
