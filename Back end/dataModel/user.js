@@ -9,3 +9,6 @@ function user(name, pass){
 user.prototype.match = function(){ //class method to check if the given password have matching user
 	
 }
+
+
+module.exports = user;
