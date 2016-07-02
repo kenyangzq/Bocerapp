@@ -20,27 +20,37 @@ var router = express.Router();
 
 //check login information
 router.post("/login",function(req,res){
-    console.log(req);
     var username = req.body.username;
     var password = req.body.password;
     var out = {
 	'Target Action':'loginresult',
 	'content':''
 	};
-    var result = db.loginCheck(username,password);
-    if(result == 1){
-	out.content = 'success';
-    }
-    else if(result == 2){
-	out.content = 'fail';
-    }
-    else if(result == 3){
-	out.content = 'not exist';
-    }
-    else{
-	out.content = 'system error';
-    }
-    res.send(out);
+    //access to the mysql databse
+    db.query('SELECT password FROM User WHERE username = ?',username,function(err,rows){
+        if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+        else{
+	    if(rows.length == 0){
+		out.content = 'not exist';
+		res.send(out);
+	    }
+	    else{
+	        var pass = rows[0].password;;
+	        if(pass == password){
+		    out.content = 'success';
+		    res.send(out);
+		}
+		else{
+		    out.content = 'fail';
+		    res.send(out);
+		}
+	    }
+	}
+    });
+
 });
 
 //add user to the database
@@ -53,17 +63,38 @@ router.post("/addUser",function(req,res){
 	'Target Action':'loginresult',
 	'content':''
     };
-    var pack = {
-	'username':username,
-	'firstname':firstname,
-	'lastname':lastname,
-	'password':password
-    };
-    var result = db.addUser(pack);
-    if(result == 1) out.content = 'success';
-    else if(result ==2) out.content = 'system error';
-    else out.content = 'already exist'
-    res.send(out);
+    db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
+        if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+        else{
+	    if(rows.length != 0){
+		out.content = 'already exist';
+		res.send(out);
+	    }
+	    else{
+	        db.query('INSERT INTO User (username, password) VALUES(?,?)',username,password,function(err){
+		    if(err){
+			out.content = 'system error';
+			res.send(out);
+		    }
+		    else{
+		        db.query('INSERT INTO Profile (username,firstname,lastname) VALUES(?,?,?)',username,firstname,lastname,function(err){
+			    if(err){
+				out.content = 'system error';
+				res.send(out);
+			    }
+			    else{
+				out.content = 'success';
+				res.send(out);
+			    }
+			});
+		    }
+		});
+	    }
+	}
+    });
 });
 
 
