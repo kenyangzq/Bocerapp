@@ -325,7 +325,8 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",userName)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/login")
+        //Bugfix -- Dempsy July.2nd
+        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/checkFacebook")
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"

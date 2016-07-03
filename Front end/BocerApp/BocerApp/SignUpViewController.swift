@@ -328,8 +328,9 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
         let targetAction = backmsg.objectForKey("Target Action") as! String
         let content = backmsg.objectForKey("content") as! String
-        //普通登录
-        if targetAction == "signinresult" {
+        //普通注册
+        //Bugfix - Dempsy July.2nd
+        if targetAction == "signupresult" {
             if content == "success" {
                 //获取用户其他信息
                 requestUserBasicInfo()
