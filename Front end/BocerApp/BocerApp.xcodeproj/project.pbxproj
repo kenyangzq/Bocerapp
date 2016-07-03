@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B11D24B80C00A2D41F /* mDataBase.swift */; };
 		255947B41D25097400A2D41F /* serverConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B31D25097400A2D41F /* serverConn.swift */; };
+		2571293E1D2909B800442700 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571293D1D2909B800442700 /* FBSDKCoreKit.framework */; };
+		257129401D2909C700442700 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571293F1D2909C700442700 /* FBSDKLoginKit.framework */; };
+		257129421D2909D200442700 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257129411D2909D200442700 /* FBSDKShareKit.framework */; };
 		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
 		2571C3CA1D1A867A00AC4042 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C91D1A867A00AC4042 /* LaunchScreenViewController.swift */; };
 		2571C3CD1D1A867A00AC4042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2571C3CB1D1A867A00AC4042 /* Main.storyboard */; };
@@ -56,6 +59,9 @@
 /* Begin PBXFileReference section */
 		255947B11D24B80C00A2D41F /* mDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mDataBase.swift; sourceTree = "<group>"; };
 		255947B31D25097400A2D41F /* serverConn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serverConn.swift; sourceTree = "<group>"; };
+		2571293D1D2909B800442700 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		2571293F1D2909C700442700 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		257129411D2909D200442700 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2571C3C71D1A867A00AC4042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2571C3C91D1A867A00AC4042 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +101,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257129421D2909D200442700 /* FBSDKShareKit.framework in Frameworks */,
 				25E7AB171D224AD500E8F314 /* libsqlite3.0.tbd in Frameworks */,
+				2571293E1D2909B800442700 /* FBSDKCoreKit.framework in Frameworks */,
+				257129401D2909C700442700 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,11 +125,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2571293C1D2909A000442700 /* facebookSDK */ = {
+			isa = PBXGroup;
+			children = (
+				257129411D2909D200442700 /* FBSDKShareKit.framework */,
+				2571293F1D2909C700442700 /* FBSDKLoginKit.framework */,
+				2571293D1D2909B800442700 /* FBSDKCoreKit.framework */,
+			);
+			name = facebookSDK;
+			sourceTree = "<group>";
+		};
 		2571C3BB1D1A867A00AC4042 = {
 			isa = PBXGroup;
 			children = (
 				25E7AB161D224AD500E8F314 /* libsqlite3.0.tbd */,
 				25E7AB271D224D5D00E8F314 /* data.db */,
+				2571293C1D2909A000442700 /* facebookSDK */,
 				25E7AB1E1D224B6F00E8F314 /* SQLiteDB */,
 				2571C3C61D1A867A00AC4042 /* BocerApp */,
 				2571C3DB1D1A867A00AC4042 /* BocerAppTests */,
@@ -525,6 +545,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4.13.1",
+				);
 				INFOPLIST_FILE = BocerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;
@@ -542,6 +566,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4.13.1",
+				);
 				INFOPLIST_FILE = BocerApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BocerApp.FrontEnd.Dempsy.BocerApp;

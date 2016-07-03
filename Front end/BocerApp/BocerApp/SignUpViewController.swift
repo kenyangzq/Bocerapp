@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate {
+class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate, FBSDKLoginButtonDelegate {
 
     
     private var mNavBar: UINavigationBar?
@@ -57,6 +57,20 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         resetPasswordTF.delegate = self
         firstNameTF.delegate = self
         lastNameTF.delegate = self
+        
+        //facebook stuff
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
+            // User is already logged in, do work such as go to next view controller.
+        }
+        else
+        {
+            let loginView : FBSDKLoginButton = FBSDKLoginButton()
+            self.view.addSubview(loginView)
+            loginView.frame = CGRect(x: self.view.center.x - 125, y: self.view.frame.size.height - 85, width: 250, height: 50)
+            loginView.readPermissions = ["public_profile", "email", "user_friends"]
+            loginView.delegate = self
+        }
     }
     
     //键盘->屏幕滑动
@@ -81,6 +95,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 let keyboardinfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
                 let keyboardheight:CGFloat = (keyboardinfo?.CGRectValue.size.height)!
                 viewDisplacement = height - 400 - keyboardheight
+                //Bugfix - 在6s及其他大屏上的屏幕向下滑动问题
+                if viewDisplacement > 0 {viewDisplacement = 0}
             }
         let rect = CGRectMake(0.0, viewDisplacement,width,height);
         self.view.frame = rect
@@ -347,7 +363,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 print("facebook login success\n")
             }
             else if content == "not exist" {
-                //TODO: 进入facebook login
+                //TODO: 进入facebook login ---有待商榷
                 
                 print("facebook account not exists")
             } else {
@@ -403,7 +419,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         
     }
     
-    @IBAction func viewClick(sender: AnyObject) {
+    @IBAction private func viewClick(sender: AnyObject) {
         firstNameTF.resignFirstResponder()
         lastNameTF.resignFirstResponder()
         emailTF.resignFirstResponder()
@@ -423,6 +439,81 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         return newPassword!
     }
     
+    //facebook login request
+    private func facebookVerifyWithUserName(userName: String) {
+        let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",userName)
+        let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
+        let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
+        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/checkFacebook")
+        let request = NSMutableURLRequest()
+        request.URL = url
+        request.HTTPMethod = "POST"
+        request.setValue(dataLength as String, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = sent
+        
+        let conn = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        indicator.alpha = 1
+        indicator.startAnimating()
+        if (conn == nil) {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Connection Failure.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    //Facebook Delegate Methods
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("User Logged In\n")
+        
+        if ((error) != nil)
+        {
+            // Process error
+            print("error: \(error)\n")
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                // Do work
+                if (FBSDKAccessToken.currentAccessToken() != nil) {
+                    //let mParameters = NSMutableDictionary()
+                    //mParameters.setValue("id,email,last_name,first_name", forKey: "fields")
+                    let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                    graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                        
+                        if ((error) != nil)
+                        {
+                            // Process error
+                            print("Error: \(error)\n")
+                        }
+                        else
+                        {
+                            print("fetched user: \(result)\n")
+                            self.firstName = result.valueForKey("first_name") as? String
+                            print("First Name is: \(self.firstName)\n")
+                            self.lastName = result.valueForKey("last_name") as? String
+                            print("Last Name is: \(self.lastName)\n")
+                            self.email = result.valueForKey("email") as? String
+                            print("Email is: \(self.email)\n")
+                            self.facebookVerifyWithUserName(self.email!)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("User Logged Out\n")
+    }
 
     /*
     // MARK: - Navigation

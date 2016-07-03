@@ -69,7 +69,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = UIColor(red: 0, green: 128/255, blue: 128/255, alpha: 0)
+        mNavBar?.backgroundColor = UIColor(red: 0, green: 128/255, blue: 128/255, alpha: 1)
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -97,7 +97,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         if (checkValidation(email,password: newPassword)) {
             beginCounting()
             let alertController = UIAlertController(title: "Warning",
-                                                    message: "A verification link has been sent to your Email", preferredStyle: .Alert)
+                                                    message: "A verification link has been sent to your Email.\nYou need to wait 60 seconds to send another one.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
