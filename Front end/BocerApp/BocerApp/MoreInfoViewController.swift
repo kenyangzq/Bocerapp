@@ -38,7 +38,7 @@ class MoreInfoViewController: UIViewController, UITableViewDelegate, UITextField
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        finishBtn.layer.cornerRadius = 10
+        finishBtn.layer.cornerRadius = 5
         photoBtn.layer.borderWidth = 1.0
         photoBtn.layer.borderColor = UIColor.blackColor().CGColor
         photoBtn.layer.cornerRadius = photoBtn.frame.width / 2
@@ -63,7 +63,7 @@ class MoreInfoViewController: UIViewController, UITableViewDelegate, UITextField
 
     
     @IBAction func photoBtnClicked(sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil);
+        let sb = UIStoryboard(name: "Initial", bundle: nil);
         let vc = sb.instantiateViewControllerWithIdentifier("AvatarPresentViewController") as UIViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -14,11 +14,11 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     private var mNavBar: UINavigationBar?
     private var checkEmail = checkEmailForm()
     private var dataChunk = NSMutableData()
-    @IBOutlet private weak var emailTF: UITextField!
-    @IBOutlet private weak var resetPasswordTF: UITextField!
+    @IBOutlet private weak var emailTF: YoshikoTextField!
+    @IBOutlet private weak var resetPasswordTF: YoshikoTextField!
     @IBOutlet private weak var nextStepBtn: UIButton!
-    @IBOutlet private weak var firstNameTF: UITextField!
-    @IBOutlet private weak var lastNameTF: UITextField!
+    @IBOutlet private weak var firstNameTF: YoshikoTextField!
+    @IBOutlet private weak var lastNameTF: YoshikoTextField!
     @IBOutlet private weak var indicator: UIActivityIndicatorView!
     private var email: String?
     private var firstName: String?
@@ -50,13 +50,21 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        nextStepBtn.layer.cornerRadius = 10
+        nextStepBtn.layer.cornerRadius = 5
         
-        //delegate textfield
+        //delegate  & customize textfield
         emailTF.delegate = self
+        emailTF.activeBorderColor = .darkGrayColor()
+        emailTF.activeBackgroundColor = UIColor.lightTextColor()
         resetPasswordTF.delegate = self
+        resetPasswordTF.activeBorderColor = .darkGrayColor()
+        resetPasswordTF.activeBackgroundColor = UIColor.lightTextColor()
         firstNameTF.delegate = self
+        firstNameTF.activeBorderColor = .darkGrayColor()
+        firstNameTF.activeBackgroundColor = UIColor.lightTextColor()
         lastNameTF.delegate = self
+        lastNameTF.activeBorderColor = .darkGrayColor()
+        lastNameTF.activeBackgroundColor = UIColor.lightTextColor()
         
         //facebook stuff
         if (FBSDKAccessToken.currentAccessToken() != nil)
@@ -75,6 +83,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     //键盘->屏幕滑动
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }

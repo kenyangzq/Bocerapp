@@ -12,8 +12,8 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
 
     private var mNavBar: UINavigationBar?
     private var checkEmail = checkEmailForm()
-    @IBOutlet private weak var emailTF: UITextField!
-    @IBOutlet private weak var resetPasswordTF: UITextField!
+    @IBOutlet private weak var emailTF: HoshiTextField!
+    @IBOutlet private weak var resetPasswordTF: HoshiTextField!
     @IBOutlet private weak var resendBtn: UIButton!
     @IBOutlet private weak var indicator: UIActivityIndicatorView!
     private var email: String?
@@ -31,7 +31,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
     
     private var remainingSeconds: Int = 0 {
         willSet {
-            resendBtn.setTitle("\(newValue)s", forState: .Disabled)
+            resendBtn.setTitle("wait \(newValue)s to resend", forState: .Disabled)
             
             if newValue <= 0 {
                 resendBtn.setTitle("Resend", forState: .Normal)
@@ -58,6 +58,11 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         isCounting = true
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,13 +82,18 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        resendBtn.layer.cornerRadius = 10
+        resendBtn.layer.cornerRadius = 5
         resendBtn.backgroundColor = UIColor(red: 102/255, green: 255/255, blue: 204/255, alpha: 1)
         
-        //delegate textfield
+        //delegate & customize textfield
         emailTF.delegate = self
+        emailTF.borderActiveColor = UIColor.blueColor()
+        emailTF.borderInactiveColor = UIColor.grayColor()
+        emailTF.placeholderColor = UIColor.grayColor()
         resetPasswordTF.delegate = self
-        
+        resetPasswordTF.borderInactiveColor = UIColor.grayColor()
+        resetPasswordTF.borderActiveColor = UIColor.redColor()
+        resetPasswordTF.placeholderColor = UIColor.grayColor()
     }
 
     @IBAction func viewClick(sender: AnyObject) {

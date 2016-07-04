@@ -20,14 +20,19 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     private var imageString: String? = nil
     private var dataChunk = NSMutableData()
     @IBOutlet private weak var mNavItem: UINavigationItem!
-    @IBOutlet private weak var emailTF: UITextField!
-    @IBOutlet private weak var passwordTF: UITextField!
+    @IBOutlet private weak var emailTF: HoshiTextField!
+    @IBOutlet private weak var passwordTF: HoshiTextField!
     @IBOutlet private weak var signInBtn: UIButton!
     @IBOutlet private weak var resetPasswordBtn: UIButton!
     @IBOutlet private weak var indicator: UIActivityIndicatorView!
  
     private var email: String?
     private var password: String?
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +57,17 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
         //设置按键圆角
-        signInBtn.layer.cornerRadius = 10
+        signInBtn.layer.cornerRadius = 5
         
-        //delgate text field
+        //delgate & customize text field
         emailTF.delegate = self
+        emailTF.borderActiveColor = UIColor.blueColor()
+        emailTF.borderInactiveColor = UIColor.grayColor()
+        emailTF.placeholderColor = UIColor.grayColor()
         passwordTF.delegate = self
-        
+        passwordTF.borderInactiveColor = UIColor.grayColor()
+        passwordTF.borderActiveColor = UIColor.redColor()
+        passwordTF.placeholderColor = UIColor.grayColor()
         //facebook stuff
         if (FBSDKAccessToken.currentAccessToken() != nil)
         {
@@ -72,6 +82,21 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             loginView.delegate = self
         }
         
+        //增加右滑返回
+        //addSwipeRecognizer()
+        self.navigationController!.interactivePopGestureRecognizer!.enabled = true
+    }
+    
+    //右滑返回
+    @objc private func returnToFatherView() {
+            self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    private func addSwipeRecognizer() {
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(SignInViewController.returnToFatherView))
+        swipeRecognizer.direction = .Right
+        swipeRecognizer.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(swipeRecognizer)
     }
     
     //按空白区域键盘回收
@@ -306,7 +331,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     }
     
     @IBAction private func resetPassword(sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil);
+        let sb = UIStoryboard(name: "Initial", bundle: nil);
         let vc = sb.instantiateViewControllerWithIdentifier("ResetPasswordViewController") as UIViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }

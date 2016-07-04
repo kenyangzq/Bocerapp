@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitialViewController: UIViewController {
+class InitialViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet private weak var SignInBtn: UIButton!
     
@@ -21,8 +21,21 @@ class InitialViewController: UIViewController {
         
         //将按键设置为圆角
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        SignInBtn.layer.cornerRadius = 10
-        SignUpBtn.layer.cornerRadius = 10
+        SignInBtn.layer.cornerRadius = 5
+        SignUpBtn.layer.cornerRadius = 5
+        
+        //
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController!.interactivePopGestureRecognizer!.enabled = true
+        
+    }
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (self.navigationController?.viewControllers)! == 1 {
+            return false
+        } else {
+            return true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +52,7 @@ class InitialViewController: UIViewController {
     
     //进入Sign In View Controller
     @IBAction private func SignIn(sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil);
+        let sb = UIStoryboard(name: "Initial", bundle: nil);
         let vc = sb.instantiateViewControllerWithIdentifier("SignInViewController") as UIViewController
      //   self.presentViewController(vc, animated: true, completion: nil)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -47,7 +60,7 @@ class InitialViewController: UIViewController {
     
     //进入Sign Up View Controller
     @IBAction private func SignUp(sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil);
+        let sb = UIStoryboard(name: "Initial", bundle: nil);
         let vc = sb.instantiateViewControllerWithIdentifier("SignUpViewController") as UIViewController
         //self.presentViewController(vc, animated: true, completion: nil)
         self.navigationController?.pushViewController(vc, animated: true)

@@ -71,8 +71,8 @@ class MessageVerificationViewController: UIViewController {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        resendBtn.layer.cornerRadius = 10
-        finishBtn.layer.cornerRadius = 10
+        resendBtn.layer.cornerRadius = 5
+        finishBtn.layer.cornerRadius = 5
         beginCounting()
     }
     
@@ -120,7 +120,7 @@ class MessageVerificationViewController: UIViewController {
         
         let faSign = base.cacheGetString("father for Message Verification")
         if faSign == "SignUp" {
-            let sb = UIStoryboard(name: "Main", bundle: nil);
+            let sb = UIStoryboard(name: "Initial", bundle: nil);
             let vc = sb.instantiateViewControllerWithIdentifier("MoreInfoViewController") as UIViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
