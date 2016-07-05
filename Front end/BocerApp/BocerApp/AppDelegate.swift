@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,
                      openURL url: NSURL,
                              sourceApplication: String?,
-                             annotation: AnyObject) -> Bool {
+                             annotation: AnyObject) -> Bool {        
         return FBSDKApplicationDelegate.sharedInstance().application(
             application,
             openURL: url,
@@ -52,5 +52,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private var _drawerViewController: KGDrawerViewController?
+    var drawerViewController: KGDrawerViewController {
+        get {
+            if let viewController = _drawerViewController {
+                return viewController
+            }
+            return prepareDrawerViewController()
+        }
+    }
+    
+    func prepareDrawerViewController() -> KGDrawerViewController {
+        let drawerViewController = KGDrawerViewController()
+        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+        let centerVC = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+        drawerViewController.centerViewController = centerVC
+        let leftVC = sb.instantiateViewControllerWithIdentifier("LeftDrawer") as UIViewController
+        drawerViewController.leftViewController = leftVC
+        
+        drawerViewController.backgroundImage = UIImage(named: "sky3")
+
+        _drawerViewController = drawerViewController
+        return drawerViewController
+    }
+    
+    func toggleLeftDrawer(sender:AnyObject, animated:Bool) {
+        _drawerViewController?.toggleDrawer(.Left, animated: true, complete: { (finished) -> Void in
+            // do nothing
+        })
+    }
+    
+    func toggleRightDrawer(sender:AnyObject, animated:Bool) {
+        _drawerViewController?.toggleDrawer(.Right, animated: true, complete: { (finished) -> Void in
+            // do nothing
+        })
+    }
 }
 

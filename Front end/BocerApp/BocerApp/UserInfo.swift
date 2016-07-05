@@ -19,7 +19,7 @@ class UserInfo {
     private var phoneNumber:String?
     private var email:String?
     private var password:String?
-    private var college:String?
+    private var imageString: String?
     private var paymentInfo = PaymentInfo?()
     private var personalStatus = UserStatus?()
     
@@ -28,7 +28,7 @@ class UserInfo {
         phoneNumber = nil
         email = nil
         password = nil
-        college = nil
+        imageString = nil
         paymentInfo = nil
         personalStatus = nil
     }
@@ -51,6 +51,11 @@ class UserInfo {
         base.cacheSetString("user protected password", value: password!)
     }
     
+    internal func setImageString(mImageString: String) {
+        imageString = mImageString
+        base.cacheSetString("user image string", value: imageString!)
+    }
+    
     internal func getName() -> (mFirst: String?, mLast: String?) {
         return (base.cacheGetString("user first name"), base.cacheGetString("user last name"))
     }
@@ -61,6 +66,10 @@ class UserInfo {
 
     internal func getEmail() -> String? {
         return base.cacheGetString("user email")
+    }
+    
+    internal func getImageString() -> String? {
+        return base.cacheGetString("user image string")
     }
     
     //TODO: Payment Info和Personal Status的设置

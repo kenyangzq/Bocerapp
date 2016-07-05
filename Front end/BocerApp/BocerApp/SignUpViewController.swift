@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     private var imageString: String?
     private let personalInfo = UserInfo()
     private var base = baseClass()
+    private var userInfo = UserInfo()
     private var viewDisplacement: CGFloat = 0
     
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = nextStepBtn.backgroundColor
+        mNavBar?.backgroundColor = usefulConstants().defaultColor
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -48,23 +49,23 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        nextStepBtn.layer.cornerRadius = 5
+        nextStepBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         
         //delegate  & customize textfield
         emailTF.delegate = self
         emailTF.activeBorderColor = .darkGrayColor()
-        emailTF.activeBackgroundColor = UIColor.lightTextColor()
+        emailTF.activeBackgroundColor = .lightTextColor()
         resetPasswordTF.delegate = self
         resetPasswordTF.activeBorderColor = .darkGrayColor()
-        resetPasswordTF.activeBackgroundColor = UIColor.lightTextColor()
+        resetPasswordTF.activeBackgroundColor = .lightTextColor()
         firstNameTF.delegate = self
         firstNameTF.activeBorderColor = .darkGrayColor()
-        firstNameTF.activeBackgroundColor = UIColor.lightTextColor()
+        firstNameTF.activeBackgroundColor = .lightTextColor()
         lastNameTF.delegate = self
         lastNameTF.activeBorderColor = .darkGrayColor()
-        lastNameTF.activeBackgroundColor = UIColor.lightTextColor()
+        lastNameTF.activeBackgroundColor = .lightTextColor()
         
         //facebook stuff
         if (FBSDKAccessToken.currentAccessToken() != nil)
@@ -104,7 +105,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             } else {
                 let keyboardinfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
                 let keyboardheight:CGFloat = (keyboardinfo?.CGRectValue.size.height)!
-                viewDisplacement = height - 400 - keyboardheight
+                viewDisplacement = height - 420 - keyboardheight
                 //Bugfix - 在6s及其他大屏上的屏幕向下滑动问题
                 if viewDisplacement > 0 {viewDisplacement = 0}
             }
@@ -276,7 +277,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"firstName\":\"%@\",\"lastName\":\"%@\",\"password\":\"%@\"}",email!,firstName!,lastName!,newPassword!)
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-            let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/addUser")
+            let path = usefulConstants().domainAddress + "/addUser"
+            let url = NSURL(fileURLWithPath: path)
             let request = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
@@ -305,7 +307,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/userbasicinfo")
+        let path = usefulConstants().domainAddress + "/userbasicinfo"
+        let url = NSURL(fileURLWithPath: path)
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"
@@ -402,7 +405,13 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 lastName = backmsg.objectForKey("lastname") as! String?
                 imageString = backmsg.objectForKey("imagestring") as! String?
                 //TODO: 进入主界面
+                userInfo.setName(firstName!, mLast: lastName!)
+                userInfo.setImageString(imageString!)
                 
+                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+
                 print("fetched user basic info successfully\n")
             }
         } else {
@@ -455,7 +464,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",userName)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/checkFacebook")
+        let path = usefulConstants().domainAddress + "/checkFacebook"
+        let url = NSURL(fileURLWithPath: path)
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"

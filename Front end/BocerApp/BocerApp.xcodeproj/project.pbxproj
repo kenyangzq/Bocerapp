@@ -10,7 +10,7 @@
 		25113A111D29F7EA00EC9EC0 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25113A0E1D29F7EA00EC9EC0 /* FBSDKCoreKit.framework */; };
 		25113A121D29F7EA00EC9EC0 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25113A0F1D29F7EA00EC9EC0 /* FBSDKLoginKit.framework */; };
 		25113A131D29F7EA00EC9EC0 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25113A101D29F7EA00EC9EC0 /* FBSDKShareKit.framework */; };
-		25113A161D29F8E200EC9EC0 /* mainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25113A151D29F8E200EC9EC0 /* mainInterface.storyboard */; };
+		25113A161D29F8E200EC9EC0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25113A151D29F8E200EC9EC0 /* MainInterface.storyboard */; };
 		25113A551D2A4D4C00EC9EC0 /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A491D2A4D4C00EC9EC0 /* AkiraTextField.swift */; };
 		25113A561D2A4D4C00EC9EC0 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A4A1D2A4D4C00EC9EC0 /* HoshiTextField.swift */; };
 		25113A581D2A4D4C00EC9EC0 /* IsaoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A4C1D2A4D4C00EC9EC0 /* IsaoTextField.swift */; };
@@ -21,6 +21,13 @@
 		25113A5D1D2A4D4C00EC9EC0 /* TextFieldsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A521D2A4D4C00EC9EC0 /* TextFieldsEffects.swift */; };
 		25113A5E1D2A4D4C00EC9EC0 /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A531D2A4D4C00EC9EC0 /* YokoTextField.swift */; };
 		25113A5F1D2A4D4C00EC9EC0 /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25113A541D2A4D4C00EC9EC0 /* YoshikoTextField.swift */; };
+		2512DC641D2B4374002964A6 /* usefulConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC631D2B4374002964A6 /* usefulConstants.swift */; };
+		2512DC6D1D2B8249002964A6 /* KGDrawerAnimating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC681D2B8249002964A6 /* KGDrawerAnimating.swift */; };
+		2512DC6E1D2B8249002964A6 /* KGDrawerSpringAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC691D2B8249002964A6 /* KGDrawerSpringAnimator.swift */; };
+		2512DC6F1D2B8249002964A6 /* KGDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC6A1D2B8249002964A6 /* KGDrawerView.swift */; };
+		2512DC701D2B8249002964A6 /* KGDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC6B1D2B8249002964A6 /* KGDrawerViewController.swift */; };
+		2512DC751D2B8906002964A6 /* MainInterfaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */; };
+		2512DC7B1D2B9612002964A6 /* LeftDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */; };
 		255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B11D24B80C00A2D41F /* mDataBase.swift */; };
 		255947B41D25097400A2D41F /* serverConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B31D25097400A2D41F /* serverConn.swift */; };
 		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
@@ -71,7 +78,7 @@
 		25113A0E1D29F7EA00EC9EC0 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		25113A0F1D29F7EA00EC9EC0 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		25113A101D29F7EA00EC9EC0 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4.13.1/FBSDKShareKit.framework"; sourceTree = "<group>"; };
-		25113A151D29F8E200EC9EC0 /* mainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = mainInterface.storyboard; sourceTree = "<group>"; };
+		25113A151D29F8E200EC9EC0 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		25113A491D2A4D4C00EC9EC0 /* AkiraTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AkiraTextField.swift; path = TextFieldEffects/AkiraTextField.swift; sourceTree = "<group>"; };
 		25113A4A1D2A4D4C00EC9EC0 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoshiTextField.swift; path = TextFieldEffects/HoshiTextField.swift; sourceTree = "<group>"; };
 		25113A4C1D2A4D4C00EC9EC0 /* IsaoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IsaoTextField.swift; path = TextFieldEffects/IsaoTextField.swift; sourceTree = "<group>"; };
@@ -83,6 +90,14 @@
 		25113A521D2A4D4C00EC9EC0 /* TextFieldsEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldsEffects.swift; path = TextFieldEffects/TextFieldsEffects.swift; sourceTree = "<group>"; };
 		25113A531D2A4D4C00EC9EC0 /* YokoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YokoTextField.swift; path = TextFieldEffects/YokoTextField.swift; sourceTree = "<group>"; };
 		25113A541D2A4D4C00EC9EC0 /* YoshikoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
+		2512DC631D2B4374002964A6 /* usefulConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = usefulConstants.swift; sourceTree = "<group>"; };
+		2512DC681D2B8249002964A6 /* KGDrawerAnimating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KGDrawerAnimating.swift; path = KGDrawer/KGDrawerAnimating.swift; sourceTree = "<group>"; };
+		2512DC691D2B8249002964A6 /* KGDrawerSpringAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KGDrawerSpringAnimator.swift; path = KGDrawer/KGDrawerSpringAnimator.swift; sourceTree = "<group>"; };
+		2512DC6A1D2B8249002964A6 /* KGDrawerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KGDrawerView.swift; path = KGDrawer/KGDrawerView.swift; sourceTree = "<group>"; };
+		2512DC6B1D2B8249002964A6 /* KGDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KGDrawerViewController.swift; path = KGDrawer/KGDrawerViewController.swift; sourceTree = "<group>"; };
+		2512DC6C1D2B8249002964A6 /* KGFloatingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KGFloatingDrawer.h; path = KGDrawer/KGFloatingDrawer.h; sourceTree = "<group>"; };
+		2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInterfaceViewController.swift; sourceTree = "<group>"; };
+		2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftDrawer.swift; sourceTree = "<group>"; };
 		255947B11D24B80C00A2D41F /* mDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mDataBase.swift; sourceTree = "<group>"; };
 		255947B31D25097400A2D41F /* serverConn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serverConn.swift; sourceTree = "<group>"; };
 		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +168,7 @@
 			children = (
 				2571C3D01D1A867A00AC4042 /* LaunchScreen.storyboard */,
 				2571C3CB1D1A867A00AC4042 /* Initial.storyboard */,
-				25113A151D29F8E200EC9EC0 /* mainInterface.storyboard */,
+				25113A151D29F8E200EC9EC0 /* MainInterface.storyboard */,
 			);
 			name = storyboards;
 			sourceTree = "<group>";
@@ -161,8 +176,10 @@
 		25113A171D29FA2C00EC9EC0 /* Secondary Classes and Methods */ = {
 			isa = PBXGroup;
 			children = (
+				2512DC631D2B4374002964A6 /* usefulConstants.swift */,
 				25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */,
 				255947B11D24B80C00A2D41F /* mDataBase.swift */,
+				25E7AB101D212AA100E8F314 /* baseClass.swift */,
 				25FDCB411D20CDE600DD400E /* StringMD5.swift */,
 			);
 			name = "Secondary Classes and Methods";
@@ -186,6 +203,27 @@
 			name = TextFieldsEffects;
 			sourceTree = "<group>";
 		};
+		2512DC671D2B8236002964A6 /* KGDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				2512DC681D2B8249002964A6 /* KGDrawerAnimating.swift */,
+				2512DC691D2B8249002964A6 /* KGDrawerSpringAnimator.swift */,
+				2512DC6A1D2B8249002964A6 /* KGDrawerView.swift */,
+				2512DC6B1D2B8249002964A6 /* KGDrawerViewController.swift */,
+				2512DC6C1D2B8249002964A6 /* KGFloatingDrawer.h */,
+			);
+			name = KGDrawer;
+			sourceTree = "<group>";
+		};
+		2512DC711D2B8868002964A6 /* Main Interface */ = {
+			isa = PBXGroup;
+			children = (
+				2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */,
+				2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */,
+			);
+			name = "Main Interface";
+			sourceTree = "<group>";
+		};
 		2571293C1D2909A000442700 /* facebookSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +239,7 @@
 			children = (
 				25E7AB161D224AD500E8F314 /* libsqlite3.0.tbd */,
 				25E7AB271D224D5D00E8F314 /* data.db */,
+				2512DC671D2B8236002964A6 /* KGDrawer */,
 				25113A1A1D2A47BA00EC9EC0 /* TextFieldsEffects */,
 				2571293C1D2909A000442700 /* facebookSDK */,
 				25E7AB1E1D224B6F00E8F314 /* SQLiteDB */,
@@ -229,6 +268,7 @@
 				25E7AB2E1D23757200E8F314 /* temproraily unnecessary */,
 				25113A171D29FA2C00EC9EC0 /* Secondary Classes and Methods */,
 				25113A141D29F8D300EC9EC0 /* storyboards */,
+				2512DC711D2B8868002964A6 /* Main Interface */,
 				25E7AB0B1D20FCF000E8F314 /* User Info */,
 				2571C4001D1CF37A00AC4042 /* Sign In/Sign Up */,
 			);
@@ -278,7 +318,6 @@
 		25E7AB0B1D20FCF000E8F314 /* User Info */ = {
 			isa = PBXGroup;
 			children = (
-				25E7AB101D212AA100E8F314 /* baseClass.swift */,
 				25FDCB3B1D20C60600DD400E /* UserInfo.swift */,
 				25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */,
 				25E7AB091D20FCDE00E8F314 /* UserStatus.swift */,
@@ -412,7 +451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25113A161D29F8E200EC9EC0 /* mainInterface.storyboard in Resources */,
+				25113A161D29F8E200EC9EC0 /* MainInterface.storyboard in Resources */,
 				25E7AB291D224D8B00E8F314 /* data.db in Resources */,
 				2571C3D21D1A867A00AC4042 /* LaunchScreen.storyboard in Resources */,
 				2571C3CF1D1A867A00AC4042 /* Assets.xcassets in Resources */,
@@ -442,8 +481,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2571C3F91D1A8F3400AC4042 /* SignInViewController.swift in Sources */,
+				2512DC6F1D2B8249002964A6 /* KGDrawerView.swift in Sources */,
+				2512DC6D1D2B8249002964A6 /* KGDrawerAnimating.swift in Sources */,
 				25E7AB251D224D5400E8F314 /* SQLTable.swift in Sources */,
 				25E7AB201D224C5F00E8F314 /* MoreInfoViewController.swift in Sources */,
+				2512DC7B1D2B9612002964A6 /* LeftDrawer.swift in Sources */,
+				2512DC6E1D2B8249002964A6 /* KGDrawerSpringAnimator.swift in Sources */,
 				2571C3F71D1A89E500AC4042 /* InitialViewController.swift in Sources */,
 				255947B41D25097400A2D41F /* serverConn.swift in Sources */,
 				2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */,
@@ -460,8 +503,10 @@
 				25113A5F1D2A4D4C00EC9EC0 /* YoshikoTextField.swift in Sources */,
 				255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */,
 				25E7AB261D224D5400E8F314 /* String-Extras.swift in Sources */,
+				2512DC641D2B4374002964A6 /* usefulConstants.swift in Sources */,
 				25E7AB151D221F2A00E8F314 /* AvatarPresentViewController.swift in Sources */,
 				25113A5E1D2A4D4C00EC9EC0 /* YokoTextField.swift in Sources */,
+				2512DC701D2B8249002964A6 /* KGDrawerViewController.swift in Sources */,
 				25E7AB2D1D23661900E8F314 /* checkEmailForm.swift in Sources */,
 				2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */,
 				25113A5C1D2A4D4C00EC9EC0 /* MinoruTextField.swift in Sources */,
@@ -471,6 +516,7 @@
 				25E7AB241D224D5400E8F314 /* SQLiteDB.swift in Sources */,
 				2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */,
 				25E7AB111D212AA100E8F314 /* baseClass.swift in Sources */,
+				2512DC751D2B8906002964A6 /* MainInterfaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

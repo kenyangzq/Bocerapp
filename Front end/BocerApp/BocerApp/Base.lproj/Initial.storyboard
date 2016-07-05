@@ -185,7 +185,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJb-u9-xNU" customClass="YoshikoTextField" customModule="BocerApp" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJb-u9-xNU" customClass="YoshikoTextField" customModule="BocerApp" customModuleProvider="target">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="STt-hd-nNG">
@@ -232,26 +232,6 @@
                                     <action selector="nextBtnClicked:" destination="9uE-gm-T58" eventType="touchUpInside" id="zPE-WA-zkK"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsl-Fa-Tqx" customClass="YoshikoTextField" customModule="BocerApp" customModuleProvider="target">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3FE-km-nem">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="60"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="no" returnKeyType="next"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3FE-km-nem"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="3FE-km-nem"/>
-                                    </mask>
-                                </variation>
-                            </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vnh-sr-BqL">
                                 <rect key="frame" x="-20" y="424" width="662" height="14"/>
                                 <subviews>
@@ -357,6 +337,27 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsl-Fa-Tqx" customClass="YoshikoTextField" customModule="BocerApp" customModuleProvider="target">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3FE-km-nem">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="no" returnKeyType="next"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3FE-km-nem"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="30" y="158" width="340" height="60"/>
+                                    <mask key="constraints">
+                                        <include reference="3FE-km-nem"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -410,9 +411,9 @@
                                 <exclude reference="Qgd-Gm-m7m"/>
                                 <exclude reference="oJb-u9-xNU"/>
                                 <exclude reference="JVc-Vh-i9e"/>
-                                <exclude reference="Wsl-Fa-Tqx"/>
                                 <exclude reference="Dc4-Ep-lak"/>
                                 <exclude reference="hcX-BO-2CV"/>
+                                <exclude reference="Wsl-Fa-Tqx"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ha5-N6-ovF"/>
@@ -449,9 +450,9 @@
                                 <include reference="Qgd-Gm-m7m"/>
                                 <include reference="oJb-u9-xNU"/>
                                 <include reference="JVc-Vh-i9e"/>
-                                <include reference="Wsl-Fa-Tqx"/>
                                 <include reference="Dc4-Ep-lak"/>
                                 <include reference="hcX-BO-2CV"/>
+                                <include reference="Wsl-Fa-Tqx"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ha5-N6-ovF"/>
@@ -654,7 +655,7 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Password    " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5bP-yP-ynp" customClass="HoshiTextField" customModule="BocerApp" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Password    " clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5bP-yP-ynp" customClass="HoshiTextField" customModule="BocerApp" customModuleProvider="target">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Cic-hV-MSk">
@@ -668,8 +669,7 @@
                                         <exclude reference="Cic-hV-MSk"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="158" width="340" height="60"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Cic-hV-MSk"/>
                                     </mask>
@@ -818,7 +818,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reset Password, at least 6 characters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SY0-hM-LTw" customClass="HoshiTextField" customModule="BocerApp" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reset Password, at least 6 characters" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SY0-hM-LTw" customClass="HoshiTextField" customModule="BocerApp" customModuleProvider="target">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="CsV-qU-Dv5">

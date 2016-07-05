@@ -22,6 +22,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
     private var lastName: String?
     private var imageString: String?
     private var base = baseClass()
+    private var userInfo = UserInfo()
     private var countdownTimer: NSTimer?
     private var dataChunk = NSMutableData()
     
@@ -74,7 +75,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = UIColor(red: 0, green: 128/255, blue: 128/255, alpha: 1)
+        mNavBar?.backgroundColor = usefulConstants().defaultColor
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -82,18 +83,18 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
-        resendBtn.layer.cornerRadius = 5
+        resendBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         resendBtn.backgroundColor = UIColor(red: 102/255, green: 255/255, blue: 204/255, alpha: 1)
         
         //delegate & customize textfield
         emailTF.delegate = self
-        emailTF.borderActiveColor = UIColor.blueColor()
-        emailTF.borderInactiveColor = UIColor.grayColor()
-        emailTF.placeholderColor = UIColor.grayColor()
+        emailTF.borderActiveColor = .blueColor()
+        emailTF.borderInactiveColor = .grayColor()
+        emailTF.placeholderColor = .grayColor()
         resetPasswordTF.delegate = self
-        resetPasswordTF.borderInactiveColor = UIColor.grayColor()
-        resetPasswordTF.borderActiveColor = UIColor.redColor()
-        resetPasswordTF.placeholderColor = UIColor.grayColor()
+        resetPasswordTF.borderInactiveColor = .grayColor()
+        resetPasswordTF.borderActiveColor = .redColor()
+        resetPasswordTF.placeholderColor = .grayColor()
     }
 
     @IBAction func viewClick(sender: AnyObject) {
@@ -116,7 +117,8 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
             let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"password\":\"%@\"}",email!,newPassword!)
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-            let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/forgetPassword")
+            let path = usefulConstants().domainAddress + "/forgetPassword"
+            let url = NSURL(fileURLWithPath: path)
             let request = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
@@ -141,7 +143,8 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/userbasicinfo")
+        let path = usefulConstants().domainAddress + "/userbasicinfo"
+        let url = NSURL(fileURLWithPath: path)
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"
@@ -215,7 +218,13 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
                 lastName = backmsg.objectForKey("lastname") as! String?
                 imageString = backmsg.objectForKey("imagestring") as! String?
                 //TODO: 进入主界面
+                userInfo.setName(firstName!, mLast: lastName!)
+                userInfo.setImageString(imageString!)
                 
+                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+
                 print("fetched user basic info successfully\n")
             }
         } else {

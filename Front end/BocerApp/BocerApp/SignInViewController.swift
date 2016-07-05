@@ -31,7 +31,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
     }
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         mNavBar?.translucent = true
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
-        mNavBar?.backgroundColor = signInBtn.backgroundColor
+        mNavBar?.backgroundColor = usefulConstants().defaultColor
         
         //设置状态栏颜色
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -57,17 +57,17 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
         //设置按键圆角
-        signInBtn.layer.cornerRadius = 5
+        signInBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         
         //delgate & customize text field
         emailTF.delegate = self
-        emailTF.borderActiveColor = UIColor.blueColor()
-        emailTF.borderInactiveColor = UIColor.grayColor()
-        emailTF.placeholderColor = UIColor.grayColor()
+        emailTF.borderActiveColor = .blueColor()
+        emailTF.borderInactiveColor = .grayColor()
+        emailTF.placeholderColor = .grayColor()
         passwordTF.delegate = self
-        passwordTF.borderInactiveColor = UIColor.grayColor()
-        passwordTF.borderActiveColor = UIColor.redColor()
-        passwordTF.placeholderColor = UIColor.grayColor()
+        passwordTF.borderInactiveColor = .grayColor()
+        passwordTF.borderActiveColor = .redColor()
+        passwordTF.placeholderColor = .grayColor()
         //facebook stuff
         if (FBSDKAccessToken.currentAccessToken() != nil)
         {
@@ -177,7 +177,9 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"password\":\"%@\"}",email!,password!)
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-            let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/login")
+            let path = usefulConstants().domainAddress + "/login"
+            let url = NSURL(fileURLWithPath: path)
+            print("login request address: \(path)\n")
             let request = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
@@ -202,7 +204,9 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/userbasicinfo")
+        let path = usefulConstants().domainAddress + "/userbasicinfo"
+        let url = NSURL(fileURLWithPath: path)
+        print("userbasicinfo request address is \(path)\n")
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"
@@ -298,7 +302,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 lastName = backmsg.objectForKey("lastname") as! String?
                 imageString = backmsg.objectForKey("imagestring") as! String?
                 //TODO: 进入主界面
+                userInfo.setName(firstName!, mLast: lastName!)
+                userInfo.setImageString(imageString!)
                 
+                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+
                 print("fetched user basic info successfully\n")
             }
         } else {
@@ -327,7 +337,15 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
 
     //设置Sign In Button的动作
     @IBAction private func signInBtnClicked(sender: UIButton) {
-        signInPerformed()
+        
+        //uncomment/comment the following one line to function normally
+        //signInPerformed()
+        
+        //TODO: Test!
+        //Uncomment/comment the following three lines to test the main storyboards
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let vc = appDelegate.drawerViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction private func resetPassword(sender: UIButton) {
@@ -351,7 +369,9 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         //Bugfix -- Dempsy July.2nd
-        let url = NSURL(fileURLWithPath: "http://www.bocerapp.com/checkFacebook")
+        let path = usefulConstants().domainAddress + "/checkFacebook"
+        let url = NSURL(fileURLWithPath: path)
+        print("facebook login request: \(path)\n")
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"

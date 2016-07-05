@@ -21,8 +21,8 @@ class InitialViewController: UIViewController, UIGestureRecognizerDelegate {
         
         //将按键设置为圆角
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        SignInBtn.layer.cornerRadius = 5
-        SignUpBtn.layer.cornerRadius = 5
+        SignInBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
+        SignUpBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         
         //
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
