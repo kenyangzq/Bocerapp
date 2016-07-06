@@ -60,7 +60,7 @@ router.post("/addUser",function(req,res){
     var lastname = req.body.lastname;
     var password = req.body.password;
     var out = {
-	'Target Action':'loginresult',
+	'Target Action':'signupresult',
 	'content':''
     };
     db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
@@ -74,13 +74,22 @@ router.post("/addUser",function(req,res){
 		res.send(out);
 	    }
 	    else{
-	        db.query('INSERT INTO User (username, password) VALUES(?,?)',username,password,function(err){
+		var auth = {
+		    'username':username,
+		    'password':password
+		};
+      	        db.query('INSERT INTO User SET ?',auth,function(err){
 		    if(err){
 			out.content = 'system error';
 			res.send(out);
 		    }
 		    else{
-		        db.query('INSERT INTO Profile (username,firstname,lastname) VALUES(?,?,?)',username,firstname,lastname,function(err){
+			var info = {
+			    'username':username,
+			    'firstname':firstname,
+			    'lastname':lastname,
+			};
+		        db.query('INSERT INTO Profile SET ?',info,function(err){
 			    if(err){
 				out.content = 'system error';
 				res.send(out);
