@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--MainInterface-->
@@ -38,44 +39,133 @@
                                     <action selector="leftBtnFired:" destination="YWJ-Z3-bbH" eventType="touchUpInside" id="SCS-ew-9dB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7d3-dW-9jW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="177" y="143" width="46" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="searchBtnFired:" destination="YWJ-Z3-bbH" eventType="touchUpInside" id="MgG-cZ-jnb"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="j1I-Ap-O3s">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="65" y="91" width="286" height="44"/>
+                                </variation>
+                            </searchBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X9Z-Ml-g6n" firstAttribute="centerX" secondItem="9Nl-j8-c1k" secondAttribute="centerX" id="2XP-dO-CII"/>
+                            <constraint firstItem="7d3-dW-9jW" firstAttribute="leading" secondItem="j1I-Ap-O3s" secondAttribute="leading" id="JLv-kN-DiL"/>
+                            <constraint firstItem="j1I-Ap-O3s" firstAttribute="top" secondItem="kmH-L2-3Yo" secondAttribute="bottom" constant="8" id="Knn-4S-zWa">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="X9Z-Ml-g6n" firstAttribute="top" secondItem="33q-pm-iKi" secondAttribute="bottom" constant="51" id="TgI-AS-LQ9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="j1I-Ap-O3s" secondAttribute="trailing" constant="35" id="TsW-nn-t9C"/>
+                            <constraint firstItem="7d3-dW-9jW" firstAttribute="top" secondItem="j1I-Ap-O3s" secondAttribute="top" id="UfD-Nt-maJ"/>
                             <constraint firstItem="33q-pm-iKi" firstAttribute="top" secondItem="kmH-L2-3Yo" secondAttribute="bottom" constant="50" id="ebK-oy-7h4"/>
                             <constraint firstItem="33q-pm-iKi" firstAttribute="centerX" secondItem="9Nl-j8-c1k" secondAttribute="centerX" id="kTD-mv-7R4"/>
+                            <constraint firstItem="7d3-dW-9jW" firstAttribute="height" secondItem="j1I-Ap-O3s" secondAttribute="height" id="kTF-j8-lkD"/>
+                            <constraint firstItem="j1I-Ap-O3s" firstAttribute="leading" secondItem="9Nl-j8-c1k" secondAttribute="leadingMargin" constant="35" id="mvu-et-03q"/>
+                            <constraint firstItem="j1I-Ap-O3s" firstAttribute="centerX" secondItem="9Nl-j8-c1k" secondAttribute="centerX" id="qBB-iP-Wtl"/>
+                            <constraint firstItem="7d3-dW-9jW" firstAttribute="width" secondItem="j1I-Ap-O3s" secondAttribute="width" id="xIC-2i-F1X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="33q-pm-iKi"/>
                                 <exclude reference="X9Z-Ml-g6n"/>
+                                <exclude reference="7d3-dW-9jW"/>
+                                <exclude reference="j1I-Ap-O3s"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2XP-dO-CII"/>
-                                <exclude reference="TgI-AS-LQ9"/>
+                                <exclude reference="Knn-4S-zWa"/>
+                                <exclude reference="TsW-nn-t9C"/>
+                                <exclude reference="mvu-et-03q"/>
+                                <exclude reference="qBB-iP-Wtl"/>
                                 <exclude reference="ebK-oy-7h4"/>
                                 <exclude reference="kTD-mv-7R4"/>
+                                <exclude reference="JLv-kN-DiL"/>
+                                <exclude reference="UfD-Nt-maJ"/>
+                                <exclude reference="kTF-j8-lkD"/>
+                                <exclude reference="xIC-2i-F1X"/>
+                                <exclude reference="2XP-dO-CII"/>
+                                <exclude reference="TgI-AS-LQ9"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="33q-pm-iKi"/>
                                 <include reference="X9Z-Ml-g6n"/>
+                                <include reference="7d3-dW-9jW"/>
+                                <include reference="j1I-Ap-O3s"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2XP-dO-CII"/>
-                                <include reference="TgI-AS-LQ9"/>
+                                <include reference="Knn-4S-zWa"/>
+                                <include reference="TsW-nn-t9C"/>
+                                <include reference="mvu-et-03q"/>
+                                <include reference="qBB-iP-Wtl"/>
                                 <include reference="ebK-oy-7h4"/>
                                 <include reference="kTD-mv-7R4"/>
+                                <include reference="JLv-kN-DiL"/>
+                                <include reference="UfD-Nt-maJ"/>
+                                <include reference="kTF-j8-lkD"/>
+                                <include reference="xIC-2i-F1X"/>
+                                <include reference="2XP-dO-CII"/>
+                                <include reference="TgI-AS-LQ9"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="EWL-Fe-J14"/>
+                    <connections>
+                        <outlet property="searchBar" destination="j1I-Ap-O3s" id="eLH-i2-oWq"/>
+                        <outlet property="searchDisplayController" destination="Dbj-6Q-6Yb" id="laS-Yq-nbw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zcv-hh-NEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Dbj-6Q-6Yb">
+                    <connections>
+                        <outlet property="delegate" destination="YWJ-Z3-bbH" id="42H-Bw-0s8"/>
+                        <outlet property="searchBar" destination="j1I-Ap-O3s" id="Efy-2x-Zue"/>
+                        <outlet property="searchContentsController" destination="YWJ-Z3-bbH" id="xcn-Di-zDA"/>
+                        <outlet property="searchResultsDataSource" destination="YWJ-Z3-bbH" id="p40-2F-Sh0"/>
+                        <outlet property="searchResultsDelegate" destination="YWJ-Z3-bbH" id="AxC-Ue-pxS"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="736.5" y="255.75"/>
+        </scene>
+        <!--Search Result View Controller-->
+        <scene sceneID="HEs-8j-mRX">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchResultViewController" title="Search Result View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hoo-bo-iWi" customClass="SearchResultViewController" customModule="BocerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qb7-ck-44M">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xCo-3P-jvh">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xCo-3P-jvh" id="orf-RF-hvY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hoo-bo-iWi" id="bYT-uh-msn"/>
+                            <outlet property="delegate" destination="hoo-bo-iWi" id="2hk-qf-Gbg"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8lu-9C-M3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1407" y="255.75"/>
         </scene>
         <!--Left Drawer View Controller-->
         <scene sceneID="Mlf-5M-RuN">

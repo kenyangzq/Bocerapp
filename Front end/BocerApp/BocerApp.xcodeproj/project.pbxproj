@@ -28,6 +28,7 @@
 		2512DC701D2B8249002964A6 /* KGDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC6B1D2B8249002964A6 /* KGDrawerViewController.swift */; };
 		2512DC751D2B8906002964A6 /* MainInterfaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */; };
 		2512DC7B1D2B9612002964A6 /* LeftDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */; };
+		2512DC7D1D2CEE87002964A6 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DC7C1D2CEE87002964A6 /* SearchResultViewController.swift */; };
 		255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B11D24B80C00A2D41F /* mDataBase.swift */; };
 		255947B41D25097400A2D41F /* serverConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B31D25097400A2D41F /* serverConn.swift */; };
 		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
@@ -98,6 +99,7 @@
 		2512DC6C1D2B8249002964A6 /* KGFloatingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KGFloatingDrawer.h; path = KGDrawer/KGFloatingDrawer.h; sourceTree = "<group>"; };
 		2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainInterfaceViewController.swift; sourceTree = "<group>"; };
 		2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftDrawer.swift; sourceTree = "<group>"; };
+		2512DC7C1D2CEE87002964A6 /* SearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		255947B11D24B80C00A2D41F /* mDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mDataBase.swift; sourceTree = "<group>"; };
 		255947B31D25097400A2D41F /* serverConn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serverConn.swift; sourceTree = "<group>"; };
 		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,8 +220,9 @@
 		2512DC711D2B8868002964A6 /* Main Interface */ = {
 			isa = PBXGroup;
 			children = (
-				2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */,
 				2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */,
+				2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */,
+				2512DC7C1D2CEE87002964A6 /* SearchResultViewController.swift */,
 			);
 			name = "Main Interface";
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				25E7AB241D224D5400E8F314 /* SQLiteDB.swift in Sources */,
 				2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */,
 				25E7AB111D212AA100E8F314 /* baseClass.swift in Sources */,
+				2512DC7D1D2CEE87002964A6 /* SearchResultViewController.swift in Sources */,
 				2512DC751D2B8906002964A6 /* MainInterfaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

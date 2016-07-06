@@ -76,7 +76,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         {
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
-            loginView.frame = CGRect(x: self.view.center.x - 125, y: self.view.frame.size.height - 85, width: 250, height: 50)
+            loginView.frame = CGRect(x: self.view.center.x - 125, y: self.view.frame.size.height - 60, width: 250, height: 40)
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
         }

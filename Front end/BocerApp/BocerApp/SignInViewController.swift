@@ -84,7 +84,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         {
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
-            loginView.frame = CGRect(x: self.view.center.x - 125, y: self.view.frame.size.height - 85, width: 250, height: 50)
+            loginView.frame = CGRect(x: self.view.center.x - 125, y: self.view.frame.size.height - 60, width: 250, height: 40)
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
         }
@@ -348,13 +348,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     @IBAction private func signInBtnClicked(sender: UIButton) {
         
         //uncomment/comment the following one line to function normally
-        signInPerformed()
+//        signInPerformed()
         
         //TODO: Test!
         //Uncomment/comment the following three lines to test the main storyboards
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        let vc = appDelegate.drawerViewController
-//        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let vc = appDelegate.drawerViewController
+        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
     
     @IBAction private func resetPassword(sender: UIButton) {

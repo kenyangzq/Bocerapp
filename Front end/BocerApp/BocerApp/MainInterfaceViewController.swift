@@ -8,18 +8,26 @@
 
 import UIKit
 
-class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate {
+class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate{
 
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+        self.navigationController?.navigationBar.addSubview(searchBar)
+        searchBar.tintColor = .clearColor()
+        searchBar.backgroundColor = .clearColor()
+        searchBar.barTintColor = .clearColor()
     }
     
     override func viewWillAppear(animated: Bool) {
         if (self.navigationController != nil)
         {self.navigationController!.interactivePopGestureRecognizer!.enabled = false}
+    }
+    
+    @IBAction func searchBtnFired(sender: UIButton) {
     }
 
     override func didReceiveMemoryWarning() {
