@@ -98,6 +98,24 @@ router.post("/addUser",function(req,res){
 });
 
 
+//Retrieve User's info.
+router.post("/retrieveUserInfo", function (req, res) {
+    var username = req.body.username;
+	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
+		if(err){
+			out.content = 'system error';
+			res.send(out);
+		}else{
+			if(rows.length == 0){
+				out.content = 'no such user exists';
+				res.send(out);
+			}else{
+				res.json({firstName:rows[0].firstName,lastName:row[0].lastName,profileImage:row[0].profileImage});
+			}
+		}
+	});
+});
+
 
 
 module.exports = router;
