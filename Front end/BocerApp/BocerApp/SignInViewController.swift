@@ -34,6 +34,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         UIApplication.sharedApplication().statusBarStyle = .LightContent
     }
     
+    //bugfix - July, 6th. Dempsy
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -178,7 +185,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
             let path = usefulConstants().domainAddress + "/login"
-            let url = NSURL(fileURLWithPath: path)
+            let url = NSURL(string: path)
             print("login request address: \(path)\n")
             let request = NSMutableURLRequest()
             request.URL = url
@@ -205,7 +212,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         let path = usefulConstants().domainAddress + "/userbasicinfo"
-        let url = NSURL(fileURLWithPath: path)
+        let url = NSURL(string: path)
         print("userbasicinfo request address is \(path)\n")
         let request = NSMutableURLRequest()
         request.URL = url
@@ -239,6 +246,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let content = backmsg.objectForKey("content") as! String
         indicator.stopAnimating()
         indicator.alpha = 0
+        print("back message is \(backmsg)")
         //普通登录
         if targetAction == "loginresult" {
             if content == "success" {
@@ -307,7 +315,8 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 let sb = UIStoryboard(name: "MainInterface", bundle: nil);
                 let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.presentViewController(vc, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(vc, animated: true)
 
                 print("fetched user basic info successfully\n")
             }
@@ -339,13 +348,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     @IBAction private func signInBtnClicked(sender: UIButton) {
         
         //uncomment/comment the following one line to function normally
-        //signInPerformed()
+        signInPerformed()
         
         //TODO: Test!
         //Uncomment/comment the following three lines to test the main storyboards
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let vc = appDelegate.drawerViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let vc = appDelegate.drawerViewController
+//        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
     
     @IBAction private func resetPassword(sender: UIButton) {
@@ -370,7 +379,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         //Bugfix -- Dempsy July.2nd
         let path = usefulConstants().domainAddress + "/checkFacebook"
-        let url = NSURL(fileURLWithPath: path)
+        let url = NSURL(string: path)
         print("facebook login request: \(path)\n")
         let request = NSMutableURLRequest()
         request.URL = url

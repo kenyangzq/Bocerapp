@@ -118,7 +118,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
             let path = usefulConstants().domainAddress + "/forgetPassword"
-            let url = NSURL(fileURLWithPath: path)
+            let url = NSURL(string: path)
             let request = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
@@ -144,7 +144,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         let path = usefulConstants().domainAddress + "/userbasicinfo"
-        let url = NSURL(fileURLWithPath: path)
+        let url = NSURL(string: path)
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"

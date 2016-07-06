@@ -351,8 +351,7 @@
                                         <exclude reference="3FE-km-nem"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="158" width="340" height="60"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="3FE-km-nem"/>
                                     </mask>

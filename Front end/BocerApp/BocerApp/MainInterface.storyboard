@@ -30,16 +30,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="51" y="325" width="298" height="21"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9Z-Ml-g6n">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Open left drawer"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="137" y="397" width="115" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="leftBtnFired:" destination="YWJ-Z3-bbH" eventType="touchUpInside" id="SCS-ew-9dB"/>
                                 </connections>
@@ -58,10 +52,10 @@
                                 <exclude reference="X9Z-Ml-g6n"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ebK-oy-7h4"/>
-                                <exclude reference="kTD-mv-7R4"/>
                                 <exclude reference="2XP-dO-CII"/>
                                 <exclude reference="TgI-AS-LQ9"/>
+                                <exclude reference="ebK-oy-7h4"/>
+                                <exclude reference="kTD-mv-7R4"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -70,10 +64,10 @@
                                 <include reference="X9Z-Ml-g6n"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ebK-oy-7h4"/>
-                                <include reference="kTD-mv-7R4"/>
                                 <include reference="2XP-dO-CII"/>
                                 <include reference="TgI-AS-LQ9"/>
+                                <include reference="ebK-oy-7h4"/>
+                                <include reference="kTD-mv-7R4"/>
                             </mask>
                         </variation>
                     </view>
@@ -92,6 +86,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Ac0-w6-fX0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sit-Ua-elA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is Left Drawer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eji-Ut-gl0">
@@ -99,9 +94,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="142" y="308" width="143" height="21"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

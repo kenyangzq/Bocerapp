@@ -90,6 +90,12 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    //Bugfix- July, 6th. Dempsy
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        
+    }
     
     @objc private func keyboardWillShow(notification:NSNotification){
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()) != nil {
@@ -265,20 +271,21 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     private func nextBtnPerformed() {
         email = emailTF.text
-        newPassword = resetPasswordTF.text
+        newPassword = resetPasswordTF.text!.md5()
         firstName = firstNameTF.text
         lastName = lastNameTF.text
+        print("email is \(email)\n newPassword is \(newPassword) \n firstname is \(firstName)\n is lastName is \(lastName)")
         if (checkValidation(firstName, last: lastName, email: email, password: newPassword)) {
             
             personalInfo.setEmail(email!)
             personalInfo.setPassword(newPassword!)
             
             //TODO: 将电话号码和新密码传入后端
-            let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"firstName\":\"%@\",\"lastName\":\"%@\",\"password\":\"%@\"}",email!,firstName!,lastName!,newPassword!)
+            let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"firstname\":\"%@\",\"lastname\":\"%@\",\"password\":\"%@\"}",email!,firstName!,lastName!,newPassword!)
             let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
             let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
             let path = usefulConstants().domainAddress + "/addUser"
-            let url = NSURL(fileURLWithPath: path)
+            let url = NSURL(string: path)
             let request = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
@@ -308,7 +315,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         let path = usefulConstants().domainAddress + "/userbasicinfo"
-        let url = NSURL(fileURLWithPath: path)
+        let url = NSURL(string: path)
         let request = NSMutableURLRequest()
         request.URL = url
         request.HTTPMethod = "POST"
@@ -344,11 +351,12 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         //普通注册
         //Bugfix - Dempsy July.2nd
         if targetAction == "signupresult" {
+            print("back message is: \(content)")
             if content == "success" {
                 //获取用户其他信息
+                print("Sign up success\n")
                 requestUserBasicInfo()
                 
-                print("login success\n")
             }
             else if content == "wrong" {
                 let alertController = UIAlertController(title: "Warning",
@@ -358,6 +366,12 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 self.presentViewController(alertController, animated: true, completion: nil)
                 
                 print("wrong email and password combination\n")
+            } else if content == "already exist"{
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Account already exists", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(title: "Warning",
                                                         message: "Connection Failure.", preferredStyle: .Alert)
@@ -410,7 +424,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 let sb = UIStoryboard(name: "MainInterface", bundle: nil);
                 let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.presentViewController(vc, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(vc, animated: true)
 
                 print("fetched user basic info successfully\n")
             }
@@ -489,6 +504,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     //Facebook Delegate Methods
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         print("User Logged In\n")
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         
         if ((error) != nil)
         {
