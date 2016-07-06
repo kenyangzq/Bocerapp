@@ -33,6 +33,6 @@ app.use("/",login);
 
 
 
-app.listen(80,function(){ //listen to localhost at port 8000
+app.listen(80,function(){ //listen to localhost at port 80, which is always used by the ec2 server programs
 	console.log("server listening");
-})
+});

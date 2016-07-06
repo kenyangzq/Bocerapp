@@ -110,6 +110,10 @@ router.post("/addUser",function(req,res){
 //Retrieve User's info.
 router.post("/retrieveUserInfo", function (req, res) {
     var username = req.body.username;
+    var out = {
+	'Target Action':'userbasicinfo',
+	'content':''
+    };
 	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
 		if(err){
 			out.content = 'system error';
