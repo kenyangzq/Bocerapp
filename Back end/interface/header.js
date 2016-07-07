@@ -21,7 +21,7 @@ var signup = {
 
 var back_msg = {
     'Target Action':'signupresult',
-    'content':['success','system error','already exist']
+    'content':['success','system error','already exist'] //just one of these
 };
 
 
@@ -32,5 +32,5 @@ var userinfo = {
 
 var back_msg = {
     'Target Action':'userbasicinfo',
-    'content':['no such user exists','system error']
+    'content':['no such user exists','system error'] //just one of these
 };
