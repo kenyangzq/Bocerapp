@@ -211,7 +211,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let path = usefulConstants().domainAddress + "/userbasicinfo"
+        let path = usefulConstants().domainAddress + "/retrieveUserInfo"
         let url = NSURL(string: path)
         print("userbasicinfo request address is \(path)\n")
         let request = NSMutableURLRequest()
