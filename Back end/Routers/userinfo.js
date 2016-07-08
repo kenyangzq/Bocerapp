@@ -123,7 +123,7 @@ router.post("/retrieveUserInfo", function (req, res) {
 				out.content = 'no such user exists';
 				res.send(out);
 			}else{
-				res.json({firstName:rows[0].firstName,lastName:row[0].lastName,profileImage:row[0].profileImage});
+				res.json({firstName:rows[0].firstName,lastName:rows[0].lastName,profileImage:rows[0].profileImage});
 			}
 		}
 	});

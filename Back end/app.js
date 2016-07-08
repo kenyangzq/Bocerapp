@@ -4,10 +4,14 @@
 
 //import needed files
 var express = require('express');
-var login = require("./Routers/userinfo");
 var bodyParser = require("body-parser");
 
 var app = express();
+
+
+//routers
+var login = require("./Routers/userinfo");
+var bookopr = require("./Routers/bookopr");
 
 //utilities
 app.use(bodyParser.urlencoded({
@@ -22,7 +26,7 @@ app.use(bodyParser.json());
 
 //user login
 app.use("/",login);
-
+app.use("/",bookopr);
 
 
 

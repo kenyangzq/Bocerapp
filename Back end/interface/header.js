@@ -34,3 +34,21 @@ var back_msg = {
     'Target Action':'userbasicinfo',
     'content':['no such user exists','system error'] //just one of these
 };
+
+
+//add book path should be: bocerbook.com/addBook
+var bookinfo = {
+    'username':username,
+    'bookname':bookname,
+    'ISBN':ISBN,
+    'author':author,
+    'edition':edition,
+    'className':className,
+    'price':price
+};
+
+var back_msg = {
+    'Target Action':'addbookresult',
+    'content':['success','server error']
+};
+
