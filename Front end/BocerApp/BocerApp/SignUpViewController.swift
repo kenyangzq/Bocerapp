@@ -271,12 +271,12 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     private func nextBtnPerformed() {
         email = emailTF.text
-        newPassword = resetPasswordTF.text!.md5()
+        newPassword = resetPasswordTF.text!
         firstName = firstNameTF.text
         lastName = lastNameTF.text
         print("email is \(email)\n newPassword is \(newPassword) \n firstname is \(firstName)\n is lastName is \(lastName)")
         if (checkValidation(firstName, last: lastName, email: email, password: newPassword)) {
-            
+            newPassword = newPassword?.md5()
             personalInfo.setEmail(email!)
             personalInfo.setPassword(newPassword!)
             
@@ -314,7 +314,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
-        let path = usefulConstants().domainAddress + "/userbasicinfo"
+        let path = usefulConstants().domainAddress + "/retrieveUserInfo"
         let url = NSURL(string: path)
         let request = NSMutableURLRequest()
         request.URL = url
@@ -346,8 +346,8 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
         indicator.alpha = 0
         indicator.stopAnimating()
         let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
-        let targetAction = backmsg.objectForKey("Target Action") as! String
-        let content = backmsg.objectForKey("content") as! String
+        let targetAction = backmsg.objectForKey("Target Action") as! String?
+        let content = backmsg.objectForKey("content") as! String?
         //普通注册
         //Bugfix - Dempsy July.2nd
         if targetAction == "signupresult" {
@@ -415,15 +415,20 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 print("Server downs when trying to get user basic info\n")
             } else {
-                firstName = backmsg.objectForKey("firstname") as! String?
-                lastName = backmsg.objectForKey("lastname") as! String?
-                imageString = backmsg.objectForKey("imagestring") as! String?
+                firstName = backmsg.objectForKey("firstName") as! String?
+                lastName = backmsg.objectForKey("lastName") as! String?
+                let temp = backmsg.objectForKey("profileImage")
+                if ((temp?.isEqual(NSNull)) != nil)  {
+                    imageString = nil
+                } else {
+                    imageString = backmsg.objectForKey("profileImage") as! String?
+                }
                 //TODO: 进入主界面
                 userInfo.setName(firstName!, mLast: lastName!)
                 userInfo.setImageString(imageString!)
                 
-                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let vc = appDelegate.drawerViewController
                 self.navigationController?.presentViewController(vc, animated: true, completion: nil)
 //                self.navigationController?.pushViewController(vc, animated: true)
 

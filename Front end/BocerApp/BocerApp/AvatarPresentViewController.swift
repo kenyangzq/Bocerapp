@@ -12,17 +12,18 @@ class AvatarPresentViewController: UIViewController, UIImagePickerControllerDele
 UINavigationControllerDelegate {
     
     @IBOutlet private weak var avatarIV: UIImageView!
-    let fullAvatarImage = "/fullAvatarImage"
-    let smallAvatarImage = "/smallAvatarImage"
+    private let fullAvatarImage = "/fullAvatarImage"
+    private let smallAvatarImage = "/smallAvatarImage"
     private var mNavBar: UINavigationBar?
+    private let someConstants = usefulConstants()
     private let base = baseClass()
+    private let userInfo = UserInfo()
     private var isFullScreen = false
     //创建图片控制器
     private let imagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         let screenMaxX = UIScreen.mainScreen().bounds.maxX
         mNavBar = UINavigationBar(frame: CGRectMake(0,0,screenMaxX,54))
@@ -30,16 +31,39 @@ UINavigationControllerDelegate {
         mNavBar?.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         mNavBar?.shadowImage = UIImage()
         mNavBar?.backgroundColor = UIColor(red: 0/255, green: 128/255, blue: 128/255, alpha: 1)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
         
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
+        
+        //initialize image view
+        //TODO: 网络同步？
+        let avatarImage: UIImage? = UIImage(contentsOfFile: someConstants.fullAvatarPath)
+        if avatarImage != nil {
+            avatarIV.image = avatarImage
+        }
     }
     
     @objc private func onCancel(){
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    private func archiveHandler(alert: UIAlertAction!) {
+        if avatarIV.image == nil {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "You don't have an avatar now, please set one", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } else {
+            UIImageWriteToSavedPhotosAlbum(avatarIV.image!, self, nil, nil)
+            self.view.makeToast("Photo saved to Album")
+        }   
     }
     
     private func cancelHandler(alert: UIAlertAction!) {
@@ -55,7 +79,7 @@ UINavigationControllerDelegate {
             //允许编辑
             imagePickerController.allowsEditing = true
             //打开相机
-            self.presentViewController(imagePickerController, animated: true, completion: { () -> Void in
+            self.presentViewController(self.imagePickerController, animated: true, completion: { () -> Void in
             })
         }else{
             print("找不到相机")
@@ -73,6 +97,7 @@ UINavigationControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.allowsEditing = true
         var image: UIImage!
         if picker.allowsEditing {
             image = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -88,15 +113,19 @@ UINavigationControllerDelegate {
          * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
          * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
          */
-        self.saveImage(image, newSize: CGSize(width: 256, height: 256), percent: 0.5, imageName: fullAvatarImage)
-        self.saveImage(image, newSize: CGSize(width: 90, height: 90), percent: 0.5, imageName: smallAvatarImage)
-        let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(fullAvatarImage)
-        print("fullpath is \(fullPath)")
-        let savedImage: UIImage = UIImage(contentsOfFile: fullPath)!
+        
+        let mSize = self.view.frame.width
+        
+        self.saveImage(image, newSize: CGSize(width: mSize, height: mSize), percent: 0.5, imageName: fullAvatarImage)
+        self.saveImage(image, newSize: CGSize(width: 200, height: 200), percent: 0.5, imageName: smallAvatarImage)
+        
+        print("fullpath is \(someConstants.smallAvatarPath)")
+        let savedImage: UIImage = UIImage(contentsOfFile: someConstants.fullAvatarPath)!
         self.isFullScreen = false
         avatarIV.image = savedImage
         //在这里调用网络通讯方法，上传头像至服务器...
         
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     //保存图片至沙盒
@@ -124,7 +153,7 @@ UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelHandler)
         let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: takePhotoHandler)
         let choosePhotoAction = UIAlertAction(title: "Choose from Photos", style: .Default, handler: choosePhotoHandler)
-        let archiveAction = UIAlertAction(title: "Save Photo", style: .Default, handler: nil)
+        let archiveAction = UIAlertAction(title: "Save Photo", style: .Default, handler: archiveHandler)
         alertController.addAction(cancelAction)
         alertController.addAction(takePhotoAction)
         alertController.addAction(choosePhotoAction)

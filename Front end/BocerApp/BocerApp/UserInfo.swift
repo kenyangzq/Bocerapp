@@ -12,64 +12,81 @@ class UserInfo {
     
     private let base = baseClass()
     private struct nameForm {
-        var first: String?
-        var last: String?
+        var first: String
+        var last: String
     }
-    private var name: nameForm?
-    private var phoneNumber:String?
-    private var email:String?
-    private var password:String?
-    private var imageString: String?
+    private var name: nameForm
+    private var phoneNumber:String
+    private var email:String
+    private var password:String
+    private var imageString: String
     private var paymentInfo = PaymentInfo?()
     private var personalStatus = UserStatus?()
     
     init () {
-        name = nil
-        phoneNumber = nil
-        email = nil
-        password = nil
-        imageString = nil
+        name = nameForm(first: "", last: "")
+        phoneNumber = ""
+        email = ""
+        password = ""
+        imageString = ""
         paymentInfo = nil
+        phoneNumber = ""
         personalStatus = nil
     }
     
     internal func setName(mFirst: String, mLast: String) {
-        name?.first = mFirst
-        name?.last = mLast
         base.cacheSetString("user first name", value: mFirst)
         base.cacheSetString("user last name", value: mLast)
     }
     
     internal func setEmail(mEmail: String) {
-        email = mEmail
         base.cacheSetString("user email", value: mEmail)
     }
     
+    internal func setPhoneNumber(mPhoneNumber: String) {
+        base.cacheSetString("user phone number", value: mPhoneNumber)
+    }
+    
     internal func setPassword(mPassword: String) {
-        let unprotectedPW = mPassword
-        password = unprotectedPW.md5()
-        base.cacheSetString("user protected password", value: password!)
+        base.cacheSetString("user protected password", value: mPassword)
     }
     
     internal func setImageString(mImageString: String) {
-        imageString = mImageString
-        base.cacheSetString("user image string", value: imageString!)
+        base.cacheSetString("user image string", value: mImageString)
     }
     
     internal func getName() -> (mFirst: String?, mLast: String?) {
-        return (base.cacheGetString("user first name"), base.cacheGetString("user last name"))
+        name.first = base.cacheGetString("user first name")
+        var first: String?
+        if name.first == "" {first = nil} else {first = name.first}
+        name.last = base.cacheGetString("user last name")
+        var last: String?
+        if name.last == "" {last = nil} else {last = name.last}
+        return (first, last)
     }
     
     internal func getPassword() -> String? {
-        return base.cacheGetString("user protected password")
+        password = base.cacheGetString("user protected password")
+        if password == "" {return nil}
+        return password
+    }
+    
+    internal func getPhoneNumber() -> String? {
+        phoneNumber = base.cacheGetString("user phone number")
+        if phoneNumber == "" {return nil}
+        return phoneNumber
     }
 
     internal func getEmail() -> String? {
-        return base.cacheGetString("user email")
+        email = base.cacheGetString("user email")
+        if email == "" {return nil}
+        return email
     }
     
     internal func getImageString() -> String? {
-        return base.cacheGetString("user image string")
+        imageString = base.cacheGetString("user image string")
+        if imageString == "" {return nil}
+        return imageString
     }
     
     //TODO: Payment Info和Personal Status的设置

@@ -35,7 +35,6 @@ var back_msg = {
     'content':['no such user exists','system error'] //just one of these
 };
 
-
 //add book path should be: bocerbook.com/addBook
 var bookinfo = {
     'username':username,
@@ -51,4 +50,3 @@ var back_msg = {
     'Target Action':'addbookresult',
     'content':['success','server error']
 };
-

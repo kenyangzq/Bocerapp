@@ -10,11 +10,95 @@ import UIKit
 
 class LeftDrawer: UIViewController {
 
+    @IBOutlet private weak var addPhotoBtn: UIButton!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var editInfoBtn: UIButton!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var phoneLabel: UILabel!
+    @IBOutlet private weak var historyBtn: UIButton!
+    @IBOutlet private weak var saleBtn: UIButton!
+    @IBOutlet private weak var avatarIV: UIImageView!
+    @IBOutlet private weak var buyBtn: UIButton!
+    private var firstName: String?
+    private var lastName: String?
+    private var email: String?
+    private var phoneNumber: String?
+    private var avatarLocalString: String?
+    private let userInfo = UserInfo()
+    private var swipeRec = UISwipeGestureRecognizer()
+    private let someConstants = usefulConstants()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.alpha = 0
+        
+        // Customize button & label attributions
+        self.view.backgroundColor = UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0)
+        addPhotoBtn.layer.cornerRadius = 50
+        addPhotoBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        editInfoBtn.layer.cornerRadius = 30
+        historyBtn.layer.cornerRadius = 30
+        saleBtn.layer.cornerRadius = 30
+        buyBtn.layer.cornerRadius = 30
+        nameLabel.adjustsFontSizeToFitWidth = true
+        
+        //add swipe gesture recognizer
+        swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(LeftDrawer.swipeView(_:)))
+        swipeRec.direction = .Left
+        self.view.addGestureRecognizer(swipeRec)
+        swipeRec.numberOfTouchesRequired = 1
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.removeGestureRecognizer(swipeRec)
+    }
+    
+    @objc private func swipeView(sender: UISwipeGestureRecognizer) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.toggleRightDrawer(sender, animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //add swipe gesture recognizer
+        swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(LeftDrawer.swipeView(_:)))
+        swipeRec.direction = .Left
+        self.view.addGestureRecognizer(swipeRec)
+        
+        //update user info
+        //TODO:本地数据库建立？
+
+        avatarLocalString = userInfo.getImageString()
+        var avatarImage: UIImage? = nil
+        if avatarLocalString == nil {
+            avatarImage = UIImage(contentsOfFile: someConstants.smallAvatarPath)
+        } else {
+            avatarImage = UIImage(contentsOfFile: avatarLocalString!)!
+        }
+        if avatarImage != nil {
+            avatarIV.image = avatarImage
+            avatarIV.layer.cornerRadius = 50
+            addPhotoBtn.setTitle(nil, forState: .Normal)
+            addPhotoBtn.backgroundColor = UIColor(white: 1, alpha: 0)
+        }
+//        (firstName, lastName) = userInfo.getName()
+//        email = userInfo.getEmail()
+//        phoneNumber = userInfo.getPhoneNumber()
+//        
+//        nameLabel.text = ""
+//        if firstName != nil {
+//            nameLabel.text = firstName!
+//        }
+//        if lastName != nil {
+//            nameLabel.text?.appendContentsOf(lastName!)
+//        }
+//        if nameLabel.text == "" {nameLabel.text = "Name"}
+//        
+//        emailLabel.text = email
+//        phoneLabel.text = phoneNumber
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +106,19 @@ class LeftDrawer: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func addPhotoFired(sender: UIButton) {
+        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+        let vc = sb.instantiateViewControllerWithIdentifier("AvatarPresentViewController") as UIViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+//    @IBAction func editBtnFired(sender: UIButton) {
+//    }
+//    @IBAction func historyBtnFired(sender: UIButton) {
+//    }
+//    @IBAction func saleBtnFired(sender: UIButton) {
+//    }
+//    @IBAction func buyBtnFired(sender: UIButton) {
+//    }
 
     /*
     // MARK: - Navigation

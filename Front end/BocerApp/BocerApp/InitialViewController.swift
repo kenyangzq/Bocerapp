@@ -11,8 +11,8 @@ import UIKit
 class InitialViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet private weak var SignInBtn: UIButton!
-    
     @IBOutlet private weak var SignUpBtn: UIButton!
+    private var userInfo = UserInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,17 @@ class InitialViewController: UIViewController, UIGestureRecognizerDelegate {
         SignInBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         SignUpBtn.layer.cornerRadius = usefulConstants().buttonCornerRadius
         
-        //
+        //delegate gesture recognizer
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController!.interactivePopGestureRecognizer!.enabled = true
-        
+     
+        //initialize user info class
+        let mString: String = ""
+        userInfo.setImageString(mString)
+        userInfo.setEmail(mString)
+        userInfo.setPassword(mString)
+        userInfo.setName(mString, mLast: mString)
+        userInfo.setPhoneNumber(mString)
     }
     
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
