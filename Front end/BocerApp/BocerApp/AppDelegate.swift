@@ -53,12 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private var _drawerViewController: KGDrawerViewController?
-    var drawerViewController: KGDrawerViewController {
+    var drawerViewController: UINavigationController {
         get {
             if let viewController = _drawerViewController {
-                return viewController
+                let navigationC=UINavigationController(rootViewController: viewController)
+                navigationC.setNavigationBarHidden(true, animated: false)
+                return navigationC
             }
-            return prepareDrawerViewController()
+            let viewController = prepareDrawerViewController()
+            let navigationC=UINavigationController(rootViewController: viewController)
+            navigationC.setNavigationBarHidden(true, animated: false)
+            return navigationC
         }
     }
     

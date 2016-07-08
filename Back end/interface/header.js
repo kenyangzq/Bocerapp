@@ -34,3 +34,4 @@ var back_msg = {
     'Target Action':'userbasicinfo',
     'content':['no such user exists','system error'] //just one of these
 };
+

@@ -106,6 +106,7 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
         email = emailTF.text
         newPassword = resetPasswordTF.text
         if (checkValidation(email,password: newPassword)) {
+            newPassword = newPassword?.md5()
             beginCounting()
             let alertController = UIAlertController(title: "Warning",
                                                     message: "A verification link has been sent to your Email.\nYou need to wait 60 seconds to send another one.", preferredStyle: .Alert)
@@ -173,8 +174,8 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
-        let targetAction = backmsg.objectForKey("Target Action") as! String
-        let content = backmsg.objectForKey("content") as! String
+        let targetAction = backmsg.objectForKey("Target Action") as! String?
+        let content = backmsg.objectForKey("content") as! String?
         indicator.stopAnimating()
         indicator.alpha = 0
         //普通登录
@@ -214,16 +215,21 @@ class ResetPasswordViewController: UIViewController, UITableViewDelegate, UIText
                 
                 print("Server downs when trying to get user basic info\n")
             } else {
-                firstName = backmsg.objectForKey("firstname") as! String?
-                lastName = backmsg.objectForKey("lastname") as! String?
-                imageString = backmsg.objectForKey("imagestring") as! String?
+                firstName = backmsg.objectForKey("firstName") as! String?
+                lastName = backmsg.objectForKey("lastName") as! String?
+                let temp = backmsg.objectForKey("profileImage")
+                if ((temp?.isEqual(NSNull)) != nil)  {
+                    imageString = nil
+                } else {
+                    imageString = backmsg.objectForKey("profileImage") as! String?
+                }
                 //TODO: 进入主界面
                 userInfo.setName(firstName!, mLast: lastName!)
                 userInfo.setImageString(imageString!)
                 
-                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let vc = appDelegate.drawerViewController
+                self.navigationController?.presentViewController(vc, animated: true, completion: nil)
 
                 print("fetched user basic info successfully\n")
             }

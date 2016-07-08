@@ -242,8 +242,9 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     func connectionDidFinishLoading(connection: NSURLConnection) {
         let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
-        let targetAction = backmsg.objectForKey("Target Action") as! String
-        let content = backmsg.objectForKey("content") as! String
+        print("back msg is \(backmsg)")
+        let targetAction = backmsg.objectForKey("Target Action") as! String?
+        let content = backmsg.objectForKey("content") as! String?
         indicator.stopAnimating()
         indicator.alpha = 0
         print("back message is \(backmsg)")
@@ -296,7 +297,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
             }
         }
         //user info
-        else if targetAction == "userbasicinfo" {
+        else if ((targetAction == "userbasicinfo") || (targetAction == nil)) {
             if content == "fail" {
                 let alertController = UIAlertController(title: "Warning",
                                                         message: "Server Issues.", preferredStyle: .Alert)
@@ -306,15 +307,20 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 print("Server downs when trying to get user basic info\n")
             } else {
-                firstName = backmsg.objectForKey("firstname") as! String?
-                lastName = backmsg.objectForKey("lastname") as! String?
-                imageString = backmsg.objectForKey("imagestring") as! String?
+                firstName = backmsg.objectForKey("firstName") as! String?
+                lastName = backmsg.objectForKey("lastName") as! String?
+                let temp = backmsg.objectForKey("profileImage") 
+                if ((temp?.isEqual(NSNull)) != nil)  {
+                    imageString = nil
+                } else {
+                    imageString = backmsg.objectForKey("profileImage") as! String?
+                }
                 //TODO: 进入主界面
                 userInfo.setName(firstName!, mLast: lastName!)
                 userInfo.setImageString(imageString!)
                 
-                let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-                let vc = sb.instantiateViewControllerWithIdentifier("MainInterfaceViewController") as UIViewController
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let vc = appDelegate.drawerViewController
                 self.navigationController?.presentViewController(vc, animated: true, completion: nil)
 //                self.navigationController?.pushViewController(vc, animated: true)
 

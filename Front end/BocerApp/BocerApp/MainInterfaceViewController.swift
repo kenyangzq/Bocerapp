@@ -11,6 +11,8 @@ import UIKit
 class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate{
 
     @IBOutlet weak var searchBar: UISearchBar!
+    private var swipeRec = UISwipeGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +22,30 @@ class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate
         searchBar.tintColor = .clearColor()
         searchBar.backgroundColor = .clearColor()
         searchBar.barTintColor = .clearColor()
+        
+        //swipe recognizer
+        
+        swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(MainInterfaceViewController.swipeView(_:)))
+        swipeRec.direction = .Right
+        self.view.addGestureRecognizer(swipeRec)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.removeGestureRecognizer(swipeRec)
+    }
+
+    
+    @objc private func swipeView(sender: UISwipeGestureRecognizer) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.toggleLeftDrawer(sender, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(MainInterfaceViewController.swipeView(_:)))
+        swipeRec.direction = .Right
+        self.view.addGestureRecognizer(swipeRec)
         if (self.navigationController != nil)
         {self.navigationController!.interactivePopGestureRecognizer!.enabled = false}
     }

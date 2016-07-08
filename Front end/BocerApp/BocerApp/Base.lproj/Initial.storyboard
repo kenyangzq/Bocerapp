@@ -1206,63 +1206,6 @@
             </objects>
             <point key="canvasLocation" x="733.5" y="542.25"/>
         </scene>
-        <!--Avatar Present View Controller-->
-        <scene sceneID="FQC-su-WvV">
-            <objects>
-                <viewController storyboardIdentifier="AvatarPresentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kXY-jo-VOF" customClass="AvatarPresentViewController" customModule="BocerApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eN2-TC-uh0"/>
-                        <viewControllerLayoutGuide type="bottom" id="N3I-54-8d8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f3Z-Yz-jaP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T4N-nb-ZaO">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="80" y="336" width="240" height="128"/>
-                                </variation>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="T4N-nb-ZaO" secondAttribute="trailing" id="LVF-wn-Coy"/>
-                            <constraint firstItem="T4N-nb-ZaO" firstAttribute="centerX" secondItem="f3Z-Yz-jaP" secondAttribute="centerX" id="goh-IO-10E"/>
-                            <constraint firstItem="T4N-nb-ZaO" firstAttribute="centerY" secondItem="f3Z-Yz-jaP" secondAttribute="centerY" id="jMD-IR-5BL"/>
-                            <constraint firstItem="T4N-nb-ZaO" firstAttribute="leading" secondItem="f3Z-Yz-jaP" secondAttribute="leadingMargin" id="vut-ys-kz1"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="T4N-nb-ZaO"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="LVF-wn-Coy"/>
-                                <exclude reference="goh-IO-10E"/>
-                                <exclude reference="jMD-IR-5BL"/>
-                                <exclude reference="vut-ys-kz1"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="T4N-nb-ZaO"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="LVF-wn-Coy"/>
-                                <include reference="goh-IO-10E"/>
-                                <include reference="jMD-IR-5BL"/>
-                                <include reference="vut-ys-kz1"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="avatarIV" destination="T4N-nb-ZaO" id="xtM-XY-rCn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bdo-Do-yLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2020.5" y="542.25"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="OvH-YV-icy">
             <objects>
