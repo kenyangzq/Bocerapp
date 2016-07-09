@@ -8,9 +8,14 @@
 //import the needed packages
 var express = require("express");
 var db = require("./db");
+var AWS = require("aws-sdk");
 
 var router = express.Router();
 
+//aws config
+AWS.config.update({accessKeyId: 'AKIAI2QINCTBNZFUSVNA', secretAccessKey: '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'});
+AWS.config.update({region: 'us-west-1'});
+var s3 = new AWS.S3({params: {Bucket: 'bocerbookimage'}});
 
 //////////////////////////////////////
 //book operations
@@ -53,6 +58,10 @@ router.post("/addBook",function(req,res){
 	
     });
 });
+
+//add book image to a book's image collection
+
+
 
 
 module.exports = router;

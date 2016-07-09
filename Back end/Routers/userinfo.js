@@ -112,9 +112,10 @@ router.post("/retrieveUserInfo", function (req, res) {
     var username = req.body.username;
     var out = {
 	'Target Action':'userbasicinfo',
-	'content':''
+	'content':'',
+	'body':''
     };
-	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
+	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){ ////////////////////<<<<<<<<<<<<<<<<<
 		if(err){
 			out.content = 'system error';
 			res.send(out);
@@ -123,7 +124,7 @@ router.post("/retrieveUserInfo", function (req, res) {
 				out.content = 'no such user exists';
 				res.send(out);
 			}else{
-				res.json({firstName:rows[0].firstName,lastName:rows[0].lastName,profileImage:rows[0].profileImage});
+				res.json({firstName:rows[0].firstName,lastName:rows[0].lastName});
 			}
 		}
 	});
