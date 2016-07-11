@@ -8,10 +8,15 @@
 //inporting the needed packages
 var express = require('express');
 var db = require('./db');
+var AWS = require('aws-sdk');
 
 var router = express.Router();
 
 
+//aws config
+AWS.config.update({accessKeyId: 'AKIAI2QINCTBNZFUSVNA', secretAccessKey: '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'});
+AWS.config.update({region: 'us-west-1'});
+var s3 = new AWS.S3({params: {Bucket: 'bocerbookimage'}});
 
 
 ///////////////////////////////////////////
@@ -94,9 +99,21 @@ router.post("/addUser",function(req,res){
 				out.content = 'system error';
 				res.send(out);
 			    }
-			    else{
-				out.content = 'success';
-				res.send(out);
+			    else{//put the user image
+				var params = {
+				    'Bucket':'boceruserimage',
+				    'Key':username+'-small',
+				};
+				s3.getObject(params, function(err, data) {
+				    if{
+					out.content = 'system error';
+					res.send(out);
+				    }
+				    else{
+					out.content = 'success';
+					res.send(out);
+				    }
+				});
 			    }
 			});
 		    }
@@ -115,7 +132,7 @@ router.post("/retrieveUserInfo", function (req, res) {
 	'content':'',
 	'body':''
     };
-	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){ ////////////////////<<<<<<<<<<<<<<<<<
+	db.query('SELECT * FROM Profile WHERE username = ?',username,function(err,rows){
 		if(err){
 			out.content = 'system error';
 			res.send(out);
@@ -123,8 +140,27 @@ router.post("/retrieveUserInfo", function (req, res) {
 			if(rows.length == 0){
 				out.content = 'no such user exists';
 				res.send(out);
-			}else{
-				res.json({firstName:rows[0].firstName,lastName:rows[0].lastName});
+			}else{//get the user profile image
+			    var params = {
+				'Bucket':'boceruserimage',
+				'Key':username + '-small'
+			    };
+			    var body = {
+				'firstname':rows[0].firstname,
+				'lastname':rows[0].lastname,
+				'profileimage':''
+			    };
+			    s3.getObject(params, function(err, data) {
+			        if (err){
+				    out.content = 'system error';
+				    res.send(out);
+				}
+			        else{
+				    out.content = 'success';
+				    out.body = body;
+				    res.send(out);
+				}
+			    });
 			}
 		}
 	});
