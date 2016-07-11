@@ -59,7 +59,68 @@ router.post("/addBook",function(req,res){
     });
 });
 
-//add book image to a book's image collection
+//add book small image to a book's image collection
+router.post("/addBookSmallImage",function(req,res){
+    var bookID = req.bookID;
+    var imagepos = req.imagepos;
+    var imagebody = imagebody;
+
+    var imageID = bookID + '-' + imagepos + '-small';
+
+    var out = {
+	'Target Action':'addbooksmallimageresult',
+	'content':''
+    };
+    
+    var params = {
+	'Bucket':'bocerbookimage',
+	'Key':imageID,
+	'Body':imagebody
+    };
+    
+    s3.putObject(params, function(err, data) {
+        if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+        else{
+	    out.content = 'success';
+	    res.send(out);
+	}
+    });
+});
+
+//add book big image to a book's image collection
+router.post("/addBookBigImage",function(req,res){
+    var bookID = req.bookID;
+    var imagepos = req.imagepos;
+    var imagebody = imagebody;
+
+    var imageID = bookID + '-' + imagepos + '-big';
+
+    var out = {
+        'Target Action':'addbookbigimageresult',
+        'content':''
+    };
+
+    var params = {
+        'Bucket':'bocerbookimage',
+        'Key':imageID,
+        'Body':imagebody
+    };
+
+    s3.putObject(params, function(err, data) {
+        if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+        else{
+	    out.content = 'success';
+	    res.send(out);
+	}
+    });
+});
+
 
 
 

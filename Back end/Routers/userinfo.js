@@ -105,7 +105,7 @@ router.post("/addUser",function(req,res){
 				    'Key':username+'-small',
 				};
 				s3.getObject(params, function(err, data) {
-				    if{
+				    if(err){
 					out.content = 'system error';
 					res.send(out);
 				    }

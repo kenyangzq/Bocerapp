@@ -59,7 +59,7 @@ var back_msg = {
     'bookID':bookID //only when the content is success will the bookID contain info
 };
 
-//add book images path should be: bocerbook.com/addBookImage
+//add book small images path should be: bocerbook.com/addBookSmallImage
 var bookimage = {
     'bookID':bookID,
     'imagepos':imagepos,
@@ -67,6 +67,18 @@ var bookimage = {
 };
 
 var back_msg = {
-    'Target Action':'addbookimageresult',
-    'content':['success','system error']
+    'Target Action':'addbooksmallimageresult',
+    'content':['success','system error'] //need to check the number of success got.
+};
+
+//add book images path should be: bocerbook.com/addBookBigImage
+var bookimage = {
+    'bookID':bookID,
+    'imagepos':imagepos,
+    'imagebody':imagebody,
+};
+
+var back_msg = {
+    'Target Action':'addbookbigimageresult',
+    'content':['success','system error'] //need to check the number of success got.
 };
