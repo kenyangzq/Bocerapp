@@ -10,7 +10,8 @@ import UIKit
 
 class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate{
 
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private var searchController: UISearchController!
     private var swipeRec = UISwipeGestureRecognizer()
     
     override func viewDidLoad() {
@@ -28,6 +29,7 @@ class MainInterfaceViewController: UIViewController, UIGestureRecognizerDelegate
         swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(MainInterfaceViewController.swipeView(_:)))
         swipeRec.direction = .Right
         self.view.addGestureRecognizer(swipeRec)
+    
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -48,7 +48,7 @@ class LeftDrawer: UIViewController {
         swipeRec.direction = .Left
         self.view.addGestureRecognizer(swipeRec)
         swipeRec.numberOfTouchesRequired = 1
-    }
+}
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -84,21 +84,26 @@ class LeftDrawer: UIViewController {
             addPhotoBtn.setTitle(nil, forState: .Normal)
             addPhotoBtn.backgroundColor = UIColor(white: 1, alpha: 0)
         }
-//        (firstName, lastName) = userInfo.getName()
-//        email = userInfo.getEmail()
-//        phoneNumber = userInfo.getPhoneNumber()
-//        
-//        nameLabel.text = ""
-//        if firstName != nil {
-//            nameLabel.text = firstName!
-//        }
-//        if lastName != nil {
-//            nameLabel.text?.appendContentsOf(lastName!)
-//        }
-//        if nameLabel.text == "" {nameLabel.text = "Name"}
-//        
-//        emailLabel.text = email
-//        phoneLabel.text = phoneNumber
+        (firstName, lastName) = userInfo.getName()
+        email = userInfo.getEmail()
+        phoneNumber = userInfo.getPhoneNumber()
+
+        nameLabel.text = someConstants.defaultFirstName+" "+someConstants.defaultLastName
+        if firstName != nil {
+            nameLabel.text = firstName!
+        }
+        if lastName != nil {
+            let c = " " as Character
+            nameLabel.text?.append(c)
+            nameLabel.text?.appendContentsOf(lastName!)
+        }
+        if nameLabel.text == "" {nameLabel.text = "Name"}
+        
+        emailLabel.text = someConstants.defaultEmail
+        if email != nil {emailLabel.text = email}
+        if phoneNumber == nil {phoneNumber = someConstants.defaultPhoneNumber}
+        phoneNumber?.adjustPhoneNumber()
+        phoneLabel.text = phoneNumber
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,8 +116,11 @@ class LeftDrawer: UIViewController {
         let vc = sb.instantiateViewControllerWithIdentifier("AvatarPresentViewController") as UIViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
-//    @IBAction func editBtnFired(sender: UIButton) {
-//    }
+    @IBAction func editBtnFired(sender: UIButton) {
+        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+        let vc = sb.instantiateViewControllerWithIdentifier("ProfileSettingViewController") as UIViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 //    @IBAction func historyBtnFired(sender: UIButton) {
 //    }
 //    @IBAction func saleBtnFired(sender: UIButton) {

@@ -17,6 +17,7 @@ UINavigationControllerDelegate {
     private var mNavBar: UINavigationBar?
     private let someConstants = usefulConstants()
     private let base = baseClass()
+    private let imageConvertion = UIImageConvertion()
     private let userInfo = UserInfo()
     private var isFullScreen = false
     //创建图片控制器
@@ -117,12 +118,13 @@ UINavigationControllerDelegate {
         let mSize = self.view.frame.width
         
         self.saveImage(image, newSize: CGSize(width: mSize, height: mSize), percent: 0.5, imageName: fullAvatarImage)
-        self.saveImage(image, newSize: CGSize(width: 200, height: 200), percent: 0.5, imageName: smallAvatarImage)
+        self.saveImage(image, newSize: CGSize(width: 150, height: 150), percent: 0.5, imageName: smallAvatarImage)
         
-        print("fullpath is \(someConstants.smallAvatarPath)")
         let savedImage: UIImage = UIImage(contentsOfFile: someConstants.fullAvatarPath)!
         self.isFullScreen = false
         avatarIV.image = savedImage
+        let smallImageConvertion = imageConvertion.imageToString(UIImage(contentsOfFile: someConstants.smallAvatarPath)!)
+        print("small pic string is \(smallImageConvertion)")
         //在这里调用网络通讯方法，上传头像至服务器...
         
         self.navigationController?.popViewControllerAnimated(true)
@@ -140,7 +142,6 @@ UINavigationControllerDelegate {
         let imageData: NSData = UIImageJPEGRepresentation(newImage, percent)!
         // 获取沙盒目录,这里将图片放在沙盒的documents文件夹中
         let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(imageName)
-        print("fullpath in saveImage function is \(fullPath)\n")
         // 将图片写入文件
         imageData.writeToFile(fullPath, atomically: false)
      }
