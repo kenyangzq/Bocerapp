@@ -57,7 +57,7 @@ import UIKit
         }
     }
     
-    private let borderThickness: CGFloat = 1
+    private let borderThickness: CGFloat = 2
     private let placeholderInsets = CGPoint(x: 6, y: 6)
     private let textFieldInsets = CGPoint(x: 6, y: 6)
     private let borderLayer = CALayer()
@@ -79,19 +79,19 @@ import UIKit
     }
     
     override public func animateViewsForTextEntry() {
-        borderLayer.borderColor = textColor?.CGColor
+        borderLayer.borderColor = UIColor.orangeColor().CGColor
         borderLayer.shadowOffset = CGSizeZero
         borderLayer.borderWidth = borderThickness
-        borderLayer.shadowColor = textColor?.CGColor
+        borderLayer.shadowColor = UIColor.orangeColor().CGColor
         borderLayer.shadowOpacity = 0.5
         borderLayer.shadowRadius = 1
     }
     
     override public func animateViewsForTextDisplay() {
-        borderLayer.borderColor = nil
+        borderLayer.borderColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1).CGColor
         borderLayer.shadowOffset = CGSizeZero
-        borderLayer.borderWidth = 0
-        borderLayer.shadowColor = nil
+        borderLayer.borderWidth = 1
+        borderLayer.shadowColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1).CGColor
         borderLayer.shadowOpacity = 0
         borderLayer.shadowRadius = 0
     }

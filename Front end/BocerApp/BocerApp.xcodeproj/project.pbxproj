@@ -30,6 +30,8 @@
 		2512DCA21D2FAA88002964A6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2512DC9F1D2FAA88002964A6 /* FBSDKLoginKit.framework */; };
 		2512DCA31D2FAA88002964A6 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2512DCA01D2FAA88002964A6 /* FBSDKShareKit.framework */; };
 		2512DCA51D2FAABA002964A6 /* ASToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DCA41D2FAABA002964A6 /* ASToast.swift */; };
+		2512DCA71D300F25002964A6 /* UIImageConvertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DCA61D300F25002964A6 /* UIImageConvertion.swift */; };
+		2512DCA91D334150002964A6 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2512DCA81D334150002964A6 /* ProfileSettingViewController.swift */; };
 		255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B11D24B80C00A2D41F /* mDataBase.swift */; };
 		255947B41D25097400A2D41F /* serverConn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255947B31D25097400A2D41F /* serverConn.swift */; };
 		2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3C71D1A867A00AC4042 /* AppDelegate.swift */; };
@@ -44,6 +46,7 @@
 		2571C3FB1D1A8FD900AC4042 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */; };
 		2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */; };
 		2571C3FF1D1BCD0F00AC4042 /* MessageVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */; };
+		25CF2E251D3347AF00A4B691 /* adjustPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CF2E241D3347AF00A4B691 /* adjustPhoneNumber.swift */; };
 		25E7AB081D20FC8A00E8F314 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */; };
 		25E7AB0A1D20FCDE00E8F314 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB091D20FCDE00E8F314 /* UserStatus.swift */; };
 		25E7AB111D212AA100E8F314 /* baseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB101D212AA100E8F314 /* baseClass.swift */; };
@@ -102,6 +105,8 @@
 		2512DC9F1D2FAA88002964A6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "APIs/FacebookSDKs-iOS-4.13.1/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		2512DCA01D2FAA88002964A6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "APIs/FacebookSDKs-iOS-4.13.1/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		2512DCA41D2FAABA002964A6 /* ASToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASToast.swift; sourceTree = "<group>"; };
+		2512DCA61D300F25002964A6 /* UIImageConvertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageConvertion.swift; sourceTree = "<group>"; };
+		2512DCA81D334150002964A6 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		255947B11D24B80C00A2D41F /* mDataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mDataBase.swift; sourceTree = "<group>"; };
 		255947B31D25097400A2D41F /* serverConn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = serverConn.swift; sourceTree = "<group>"; };
 		2571C3C41D1A867A00AC4042 /* BocerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BocerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +127,7 @@
 		2571C3FA1D1A8FD900AC4042 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		2571C3FC1D1B876000AC4042 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageVerificationViewController.swift; sourceTree = "<group>"; };
+		25CF2E241D3347AF00A4B691 /* adjustPhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = adjustPhoneNumber.swift; sourceTree = "<group>"; };
 		25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		25E7AB091D20FCDE00E8F314 /* UserStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
 		25E7AB101D212AA100E8F314 /* baseClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = baseClass.swift; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 			children = (
 				2512DC631D2B4374002964A6 /* usefulConstants.swift */,
 				25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */,
+				2512DCA61D300F25002964A6 /* UIImageConvertion.swift */,
+				25CF2E241D3347AF00A4B691 /* adjustPhoneNumber.swift */,
 				255947B11D24B80C00A2D41F /* mDataBase.swift */,
 				25E7AB101D212AA100E8F314 /* baseClass.swift */,
 				25FDCB411D20CDE600DD400E /* StringMD5.swift */,
@@ -226,6 +234,7 @@
 				2512DC741D2B8906002964A6 /* MainInterfaceViewController.swift */,
 				2512DC7A1D2B9612002964A6 /* LeftDrawer.swift */,
 				25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */,
+				2512DCA81D334150002964A6 /* ProfileSettingViewController.swift */,
 			);
 			name = "Main Interface";
 			sourceTree = "<group>";
@@ -502,8 +511,10 @@
 				2512DC971D2FAA6F002964A6 /* JiroTextField.swift in Sources */,
 				25FDCB3C1D20C60600DD400E /* UserInfo.swift in Sources */,
 				2512DC831D2FAA5F002964A6 /* KGDrawerAnimating.swift in Sources */,
+				25CF2E251D3347AF00A4B691 /* adjustPhoneNumber.swift in Sources */,
 				25FDCB421D20CDE600DD400E /* StringMD5.swift in Sources */,
 				2512DC961D2FAA6F002964A6 /* IsaoTextField.swift in Sources */,
+				2512DCA91D334150002964A6 /* ProfileSettingViewController.swift in Sources */,
 				25E7AB081D20FC8A00E8F314 /* PaymentInfo.swift in Sources */,
 				2512DCA51D2FAABA002964A6 /* ASToast.swift in Sources */,
 				255947B21D24B80C00A2D41F /* mDataBase.swift in Sources */,
@@ -512,6 +523,7 @@
 				25E7AB151D221F2A00E8F314 /* AvatarPresentViewController.swift in Sources */,
 				25E7AB2D1D23661900E8F314 /* checkEmailForm.swift in Sources */,
 				2571C3FD1D1B876000AC4042 /* ResetPasswordViewController.swift in Sources */,
+				2512DCA71D300F25002964A6 /* UIImageConvertion.swift in Sources */,
 				25E7AB0A1D20FCDE00E8F314 /* UserStatus.swift in Sources */,
 				2512DC981D2FAA6F002964A6 /* KaedeTextField.swift in Sources */,
 				2571C3C81D1A867A00AC4042 /* AppDelegate.swift in Sources */,
