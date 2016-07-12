@@ -157,6 +157,7 @@ router.post("/retrieveUserInfo", function (req, res) {
 				}
 			        else{
 				    out.content = 'success';
+				    body.profileimage = data;
 				    out.body = body;
 				    res.send(out);
 				}
@@ -166,6 +167,34 @@ router.post("/retrieveUserInfo", function (req, res) {
 	});
 });
 
+//add user small image to a user's profile
+router.post("/addUserSmallImage",function(req,res){
+    var username = req.username;
+    var imagebody = imagebody;
 
+    var imageID = username + '-small';
+
+    var out = {
+        'Target Action':'addusersmallimageresult',
+        'content':''
+    };
+
+    var params = {
+        'Bucket':'bocerbookimage',
+        'Key':imageID,
+        'Body':imagebody
+    };
+
+    s3.putObject(params, function(err, data) {
+        if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+        else{
+	    out.content = 'success';
+	    res.send(out);
+	}
+    });
+});
 
 module.exports = router;

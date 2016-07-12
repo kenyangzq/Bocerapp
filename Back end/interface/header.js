@@ -42,6 +42,17 @@ var body = {
     'profileimage':profileimage
 };
 
+//add user small images path should be: bocerbook.com/addUserSmallImage
+var bookimage = {
+    'username':username,
+    'imagebody':imagebody,
+};
+
+var back_msg = {
+    'Target Action':'addusersmallimageresult',
+    'content':['success','system error'] //need to check the number of success got.
+};
+
 //add book path should be: bocerbook.com/addBook
 var bookinfo = {
     'username':username,
