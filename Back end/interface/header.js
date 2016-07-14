@@ -61,7 +61,8 @@ var bookinfo = {
     'author':author,
     'edition':edition,
     'className':className,
-    'price':price
+    'price':price,
+    'imagenum':imagenum
 };
 
 var back_msg = {
@@ -93,3 +94,33 @@ var back_msg = {
     'Target Action':'addbookbigimageresult',
     'content':['success','system error'] //need to check the number of success got.
 };
+
+
+
+//retrieve book info path should be: bocerbook.com/retrieveBookBasicInfo
+var request = {
+    'username':username
+};
+
+var back_msg = {
+    'Target Action':'retrievebookbasicinforesult',
+    'content':['success','system error'] //only when the result is success will the body contain info
+    'body':body
+};
+
+var body = [book1Json, book2Json........]
+
+
+//retrieve book small image path should be: bocerbook.com/retrieveBookSmallImage
+var request = {
+    'bookID':bookID,
+    'imagenum':imagenum
+};
+
+var back_msg = {
+    'Target Action':'retrievebooksmallimageresult',
+    'content':['success','system error'], //same here
+    'imagepos':imagepos,
+    'imagebody':imagebody 
+};
+

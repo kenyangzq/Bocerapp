@@ -31,6 +31,7 @@ router.post("/addBook",function(req,res){
     var edition = req.body.edition;
     var className = req.body.className;
     var price = req.body.price;
+    var imagenum = req.body.imagenum;
     var out = {
 	'Target Action':'addbookresult',
 	'content':''
@@ -44,7 +45,8 @@ router.post("/addBook",function(req,res){
 	'edition':edition,
 	'state':'0',
 	'className':className,
-	'price':price
+	'price':price,
+	'imagenum':imagenum
     };
     db.query('INSERT INTO Book SET ?',bookinfo,function(err){
 	if(err){
@@ -120,6 +122,67 @@ router.post("/addBookBigImage",function(req,res){
 	}
     });
 });
+
+
+//retrieve book basic info
+router.post('/retrieveBookBasicInfo',function(req,res){
+    var username = req.body.username;
+    var out = {
+	'Target Action':'retrievebookbasicinforesult',
+	'content':'',
+	'body':''
+    };
+    db.query('select * from Book where username = ?',username,function(err,rows){
+	if(err){
+	    out.content = 'system error';
+	    res.send(out);
+	}
+	else{
+	    out.content = 'success';
+	    out.body = rows;
+	    res.send(out);
+	}
+    });
+
+
+
+});
+
+
+//retrieve book small images
+router.post('retrieveBookSmallImage',function(req,res){
+    var bookID = req.body.bookID;
+    var imagenum = req.body.imagenum;
+    var out = {
+	'Target Action':'retrievebooksmallimageresult',
+	'content':'',
+	'imagepos':'',
+	'imagebody':''
+    };
+    for(int ite = 1; ite <= imagenum; ite ++){
+	var imageID = bookID + '-' + ite + '-small';
+	var params = {
+	    'Bucket':'bocerbookimage',
+	    'Key':imageID,
+	};
+	s3.getObject(params, function(err, data) {
+	    if(err){
+	        out.content = 'system error';
+		out.imagepos = ite;
+	        res.send(out);
+	    }
+	    else{
+	        out.content = 'success';
+		out.imagepos = ite;
+		out.imagebody = data;
+	        res.send(out);
+	    }
+	});
+
+    }
+});
+
+
 
 
 
