@@ -63,6 +63,7 @@
 		25E7AB261D224D5400E8F314 /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB231D224D5400E8F314 /* String-Extras.swift */; };
 		25E7AB291D224D8B00E8F314 /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 25E7AB271D224D5D00E8F314 /* data.db */; };
 		25E7AB2D1D23661900E8F314 /* checkEmailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */; };
+		25EA40381D37C51900F5D262 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EA40371D37C51900F5D262 /* BookInfo.swift */; };
 		25FDCB3C1D20C60600DD400E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCB3B1D20C60600DD400E /* UserInfo.swift */; };
 		25FDCB421D20CDE600DD400E /* StringMD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCB411D20CDE600DD400E /* StringMD5.swift */; };
 /* End PBXBuildFile section */
@@ -149,6 +150,7 @@
 		25E7AB231D224D5400E8F314 /* String-Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String-Extras.swift"; path = "../sqlite3/SQLiteDB/String-Extras.swift"; sourceTree = "<group>"; };
 		25E7AB271D224D5D00E8F314 /* data.db */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.db; path = ../sqlite3/data.db; sourceTree = "<group>"; };
 		25E7AB2C1D23661900E8F314 /* checkEmailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = checkEmailForm.swift; sourceTree = "<group>"; };
+		25EA40371D37C51900F5D262 /* BookInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		25FDCB3B1D20C60600DD400E /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		25FDCB3D1D20CC8900DD400E /* BocerApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BocerApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		25FDCB411D20CDE600DD400E /* StringMD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringMD5.swift; sourceTree = "<group>"; };
@@ -352,7 +354,6 @@
 		25CF2E2F1D3618D400A4B691 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */,
 				2512DCA81D334150002964A6 /* ProfileSettingViewController.swift */,
 			);
 			name = Profile;
@@ -374,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				25FDCB3B1D20C60600DD400E /* UserInfo.swift */,
+				25EA40371D37C51900F5D262 /* BookInfo.swift */,
 				25E7AB071D20FC8A00E8F314 /* PaymentInfo.swift */,
 				25E7AB091D20FCDE00E8F314 /* UserStatus.swift */,
 			);
@@ -393,6 +395,7 @@
 		25E7AB2E1D23757200E8F314 /* temproraily unnecessary */ = {
 			isa = PBXGroup;
 			children = (
+				25E7AB141D221F2A00E8F314 /* AvatarPresentViewController.swift */,
 				255947B31D25097400A2D41F /* serverConn.swift */,
 				2571C3FE1D1BCD0F00AC4042 /* MessageVerificationViewController.swift */,
 				25E7AB1F1D224C5F00E8F314 /* MoreInfoViewController.swift */,
@@ -534,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25EA40381D37C51900F5D262 /* BookInfo.swift in Sources */,
 				2512DC9C1D2FAA6F002964A6 /* YokoTextField.swift in Sources */,
 				2571C3F91D1A8F3400AC4042 /* SignInViewController.swift in Sources */,
 				2512DC9D1D2FAA6F002964A6 /* YoshikoTextField.swift in Sources */,

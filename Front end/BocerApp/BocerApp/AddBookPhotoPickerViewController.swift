@@ -8,14 +8,21 @@
 
 import UIKit
 
+protocol  ChangeImageDelegate:NSObjectProtocol {
+    func changeImage(controller: AddBookPhotoPickerViewController, image:UIImage)
+}
+
 class AddBookPhotoPickerViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
-    
+        
     @IBOutlet private weak var photoIV: UIImageView!
+    var image: UIImage?
     private var mNavBar: UINavigationBar?
     private let someConstants = usefulConstants()
     private let imageConvertion = UIImageConvertion()
     private var isFullScreen = false
+    private var currentImage = UIImage()
+    var delegate: ChangeImageDelegate?
     //创建图片控制器
     private let imagePickerController = UIImagePickerController()
     
@@ -38,8 +45,13 @@ UINavigationControllerDelegate {
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
         //initialize image view
+        photoIV.image = image
         //TODO: 网络同步？
 
+    }
+    
+    @objc private func getPresentImage(notification: NSNotification) {
+        currentImage = notification.object?.valueForKey("presentphoto") as! UIImage
     }
     
     @objc private func onCancel(){
@@ -117,7 +129,13 @@ UINavigationControllerDelegate {
         photoIV.image = newImage
         //在这里调用网络通讯方法，上传头像至服务器...
         //TODO:上传至服务器
-        saveImage(image, newSize: newSize, percent: 0.5, imageName: "/temporaryphoto")
+//        saveImage(image, newSize: newSize, percent: 0.5, imageName: "/temporaryphoto")
+////        let dic = ["newphoto": newImage] as NSDictionary
+//        NSNotificationCenter.defaultCenter().postNotificationName("NewPhotoForBook", object: self, userInfo: ["newphoto": newImage])
+//        print("notification sent")
+        if ((delegate) != nil) {
+            delegate?.changeImage(self, image: newImage)
+        }
         self.navigationController?.popViewControllerAnimated(true)
     }
     

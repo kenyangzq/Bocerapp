@@ -8,7 +8,11 @@
 
 import UIKit
 
-class AddBookPhotoViewController: UIViewController {
+protocol  ChangeBookImagesDelegate:NSObjectProtocol {
+    func changeImage(controller: AddBookPhotoViewController, frontimage:UIImage, backimage:UIImage, sideimage: UIImage)
+}
+
+class AddBookPhotoViewController: UIViewController, ChangeImageDelegate {
 
     enum photoPos: Int {
         case none = 0, front = 1, back = 2,side = 3
@@ -20,8 +24,12 @@ class AddBookPhotoViewController: UIViewController {
     @IBOutlet private weak var backBtn: UIButton!
     @IBOutlet private weak var sideBtn: UIButton!
     private var mNavBar: UINavigationBar!
-    var mImage = UIImage?()
-    var mImagePos = photoPos(rawValue: 0)
+    private var mImage = UIImage?()
+    private var mImagePos = photoPos(rawValue: 0)
+    var delegate : ChangeBookImagesDelegate?
+    var frontImage: UIImage?
+    var backImage: UIImage?
+    var sideImage: UIImage?
     
     @IBAction private func frontFired(sender: UIButton) {
         mImagePos = .front
@@ -44,15 +52,31 @@ class AddBookPhotoViewController: UIViewController {
     private func presentView(image: UIImage?) {
         print("go to add book photo picker")
         let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-        let vc = sb.instantiateViewControllerWithIdentifier("AddBookPhotoPickerViewController") as UIViewController
+        let vc = sb.instantiateViewControllerWithIdentifier("AddBookPhotoPickerViewController") as! AddBookPhotoPickerViewController
+        vc.delegate = self
+        vc.image = image
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+//    @objc func getPresentImage(notification: NSNotification) {
+//        let userInfo = notification.userInfo as! [String: AnyObject]
+//        print("user info is \(userInfo)")
+//        mImage = userInfo["newphoto"] as? UIImage
+//    }
+    
+    func changeImage(controller: AddBookPhotoPickerViewController, image: UIImage) {
+        mImage = image
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if mImagePos != .none {
-            mImage = UIImage(contentsOfFile: NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString("/temporaryphoto"))
-        }
+//        if mImagePos != .none {
+//    
+//            print("\(mImage)")
+//
+//            NSNotificationCenter.defaultCenter().removeObserver(self, name: "NewPhotoForBook", object: nil)
+//            NSNotificationCenter.defaultCenter().removeObserver(self)
+//        }
         if mImagePos == .front {
             frontIV.image = mImage
             frontBtn.setTitle(nil, forState: .Normal)
@@ -87,6 +111,10 @@ class AddBookPhotoViewController: UIViewController {
         self.view.addSubview(mNavBar!)
         mNavBar?.pushNavigationItem(onMakeNavitem(), animated: true)
         
+        frontIV.image = frontImage
+        backIV.image = backImage
+        sideIV.image = sideImage
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,7 +136,6 @@ class AddBookPhotoViewController: UIViewController {
     }
     
     @objc private func onDone() {
-        let newSize = CGSize(width: 60, height: 60)
         
         if frontIV.image == nil {
             let alertController = UIAlertController(title: "Warning",
@@ -118,7 +145,6 @@ class AddBookPhotoViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-        saveImage(frontIV.image!, newSize: newSize, percent: 1, imageName: "/temprorayfrontimage")
         
         if backIV.image == nil {
             let alertController = UIAlertController(title: "Warning",
@@ -128,7 +154,6 @@ class AddBookPhotoViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-        saveImage(backIV.image!, newSize: newSize, percent: 1, imageName: "/temproraybackimage")
         
         if sideIV.image == nil {
             let alertController = UIAlertController(title: "Warning",
@@ -138,8 +163,14 @@ class AddBookPhotoViewController: UIViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-        saveImage(sideIV.image!, newSize: newSize, percent: 1, imageName: "/temproraysideimage")
         
+        print("delegate is \(delegate)")
+        if ((delegate) != nil) {
+            let fImage = frontIV.image!
+            let bImage = backIV.image!
+            let sImage = sideIV.image!
+            delegate?.changeImage(self, frontimage: fImage, backimage: bImage, sideimage: sImage)
+        }
         self.navigationController?.popViewControllerAnimated(true)
     }
     

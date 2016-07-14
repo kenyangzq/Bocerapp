@@ -17,7 +17,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     private let signInRequest = serverConn()
     private var firstName: String? = nil
     private var lastName: String? = nil
-    private var imageString: String? = nil
+    private var imageString: String = ""
     private var dataChunk = NSMutableData()
     @IBOutlet private weak var mNavItem: UINavigationItem!
     @IBOutlet private weak var emailTF: HoshiTextField!
@@ -208,6 +208,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     }
     
     private func requestUserBasicInfo() {
+        userInfo.setEmail(email!)
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
@@ -307,17 +308,29 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 print("Server downs when trying to get user basic info\n")
             } else {
-                firstName = backmsg.objectForKey("firstName") as! String?
-                lastName = backmsg.objectForKey("lastName") as! String?
-                let temp = backmsg.objectForKey("profileImage") 
-                if ((temp?.isEqual(NSNull)) != nil)  {
-                    imageString = nil
+//                firstName = backmsg.objectForKey("firstname") as! String?
+//                lastName = backmsg.objectForKey("lastname") as! String?
+//                let temp = backmsg.objectForKey("profileImage") 
+//                if ((temp?.isEqual(NSNull)) != nil)  {
+//                    imageString = nil
+//                } else {
+//                    imageString = backmsg.objectForKey("profileImage") as! String?
+//                }
+                print("\(backmsg)")
+                let bodydata = backmsg.objectForKey("body") as! NSDictionary
+                print("body data is \(bodydata)")
+                firstName = bodydata["firstname"] as! NSString as String
+                lastName = bodydata["lastname"] as! NSString as String
+                let temp = bodydata["profileImage"] as! NSString? as String?
+                print("\(temp)")
+                if (temp == nil)  {
+                    imageString = ""
                 } else {
-                    imageString = backmsg.objectForKey("profileImage") as! String?
+                    imageString = temp!
                 }
                 //TODO: 进入主界面
                 userInfo.setName(firstName!, mLast: lastName!)
-                userInfo.setImageString(imageString!)
+                userInfo.setImageString(imageString)
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let vc = appDelegate.drawerViewController
@@ -354,13 +367,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     @IBAction private func signInBtnClicked(sender: UIButton) {
         
         //uncomment/comment the following one line to function normally
-//        signInPerformed()
+        signInPerformed()
         
         //TODO: Test!
         //Uncomment/comment the following three lines to test the main storyboards
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let vc = appDelegate.drawerViewController
-        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let vc = appDelegate.drawerViewController
+//        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
     
     @IBAction private func resetPassword(sender: UIButton) {

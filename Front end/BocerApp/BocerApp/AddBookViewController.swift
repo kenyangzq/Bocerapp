@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddBookViewController: UIViewController, UITextFieldDelegate {
+class AddBookViewController: UIViewController, UITextFieldDelegate, ChangeBookImagesDelegate {
 
     @IBOutlet private weak var captionTF: MinoruTextField!
     @IBOutlet private weak var editionTF: MinoruTextField!
@@ -18,6 +18,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet private weak var frontIV: UIImageView!
     @IBOutlet private weak var backIV: UIImageView!
     @IBOutlet private weak var sideIV: UIImageView!
+
 //    @IBOutlet private weak var descrpitionTF: MinoruTextField!
     @IBOutlet private weak var addPhtoBtn: UIButton!
     private var mNavBar: UINavigationBar?
@@ -27,8 +28,13 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addBtnFired(sender: UIButton) {
+        
         let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-        let vc = sb.instantiateViewControllerWithIdentifier("AddBookPhotoViewController") as UIViewController
+        let vc = sb.instantiateViewControllerWithIdentifier("AddBookPhotoViewController") as! AddBookPhotoViewController
+        vc.delegate = self
+        vc.frontImage = frontIV.image
+        vc.backImage = backIV.image
+        vc.sideImage = sideIV.image
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -81,7 +87,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
 //        let doneBtn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ProfileSettingViewController.onDone))
 //        doneBtn.tintColor = UIColor.whiteColor()
         let mNavItem = UINavigationItem()
-        mNavItem.title = "SIGN IN"
+        mNavItem.title = "ADD BOOK"
         mNavItem.setLeftBarButtonItem(backBtn, animated: true)
 //        mNavItem.setRightBarButtonItem(doneBtn, animated: true)
         return mNavItem
@@ -148,11 +154,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddBookViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddBookViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        
-        //获取图片
-        frontIV.image = UIImage(contentsOfFile: NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString("/temporaryfrontphoto"))
-        backIV.image = UIImage(contentsOfFile: NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString("/temporarybackphoto"))
-        sideIV.image = UIImage(contentsOfFile: NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString("/temporarysidephoto"))
+    
     }
     
     @objc private func keyboardWillShow(notification:NSNotification){
@@ -184,6 +186,17 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         let height = self.view.frame.size.height;
         let rect = CGRectMake(0.0, 0,width,height);
         self.view.frame = rect
+    }
+    
+    private func addBook() {
+        
+    }
+    
+    func changeImage(controller: AddBookPhotoViewController, frontimage:UIImage, backimage:UIImage, sideimage: UIImage) {
+        print("change photos")
+        frontIV.image = frontimage
+        backIV.image = backimage
+        sideIV.image = sideimage
     }
     /*
     // MARK: - Navigation
