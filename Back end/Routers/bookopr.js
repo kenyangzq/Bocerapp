@@ -159,7 +159,7 @@ router.post('retrieveBookSmallImage',function(req,res){
 	'imagepos':'',
 	'imagebody':''
     };
-    for(int ite = 1; ite <= imagenum; ite ++){
+    for(var ite = 1; ite <= imagenum; ite ++){
 	var imageID = bookID + '-' + ite + '-small';
 	var params = {
 	    'Bucket':'bocerbookimage',
