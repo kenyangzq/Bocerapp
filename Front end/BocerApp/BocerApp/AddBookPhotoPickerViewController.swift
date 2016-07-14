@@ -8,17 +8,13 @@
 
 import UIKit
 
-class AvatarPresentViewController: UIViewController, UIImagePickerControllerDelegate,
+class AddBookPhotoPickerViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
-    @IBOutlet private weak var avatarIV: UIImageView!
-    private let fullAvatarImage = "/fullAvatarImage"
-    private let smallAvatarImage = "/smallAvatarImage"
+    @IBOutlet private weak var photoIV: UIImageView!
     private var mNavBar: UINavigationBar?
     private let someConstants = usefulConstants()
-    private let base = baseClass()
     private let imageConvertion = UIImageConvertion()
-    private let userInfo = UserInfo()
     private var isFullScreen = false
     //创建图片控制器
     private let imagePickerController = UIImagePickerController()
@@ -33,7 +29,7 @@ UINavigationControllerDelegate {
         mNavBar?.shadowImage = UIImage()
         mNavBar?.backgroundColor = UIColor(red: 0/255, green: 128/255, blue: 128/255, alpha: 1)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
+        
         
         let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         mNavBar?.titleTextAttributes = navTitleAttribute as? [String : AnyObject]
@@ -43,10 +39,7 @@ UINavigationControllerDelegate {
         
         //initialize image view
         //TODO: 网络同步？
-        let avatarImage: UIImage? = UIImage(contentsOfFile: someConstants.fullAvatarPath)
-        if avatarImage != nil {
-            avatarIV.image = avatarImage
-        }
+
     }
     
     @objc private func onCancel(){
@@ -54,17 +47,17 @@ UINavigationControllerDelegate {
     }
     
     private func archiveHandler(alert: UIAlertAction!) {
-        if avatarIV.image == nil {
+        if photoIV.image == nil {
             let alertController = UIAlertController(title: "Warning",
-                                                    message: "You don't have an avatar now, please set one", preferredStyle: .Alert)
+                                                    message: "You don't have a photo now, please set one", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             
         } else {
-            UIImageWriteToSavedPhotosAlbum(avatarIV.image!, self, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(photoIV.image!, self, nil, nil)
             self.view.makeToast("Photo saved to Album")
-        }   
+        }
     }
     
     private func cancelHandler(alert: UIAlertAction!) {
@@ -78,7 +71,7 @@ UINavigationControllerDelegate {
             //设置来源
             imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
             //允许编辑
-            imagePickerController.allowsEditing = true
+//            imagePickerController.allowsEditing = true
             //打开相机
             self.presentViewController(self.imagePickerController, animated: true, completion: { () -> Void in
             })
@@ -116,18 +109,15 @@ UINavigationControllerDelegate {
          */
         
         let mSize = self.view.frame.width
-        
-        self.saveImage(image, newSize: CGSize(width: mSize, height: mSize), percent: 0.5, imageName: fullAvatarImage)
-        self.saveImage(image, newSize: CGSize(width: 150, height: 150), percent: 0.5, imageName: smallAvatarImage)
-        
-        let savedImage: UIImage = UIImage(contentsOfFile: someConstants.fullAvatarPath)!
+        let newSize = CGSize(width: mSize, height: mSize)
+        UIGraphicsBeginImageContext(newSize)
+        image.drawInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         self.isFullScreen = false
-        avatarIV.image = savedImage
-        let smallImageConvertion = imageConvertion.imageToString(UIImage(contentsOfFile: someConstants.smallAvatarPath)!)
-        UIImageWriteToSavedPhotosAlbum(UIImage(contentsOfFile: someConstants.smallAvatarPath)!, self, nil, nil)
-        print("small pic string is \(smallImageConvertion)")
+        photoIV.image = newImage
         //在这里调用网络通讯方法，上传头像至服务器...
-        
+        //TODO:上传至服务器
+        saveImage(image, newSize: newSize, percent: 0.5, imageName: "/temporaryphoto")
         self.navigationController?.popViewControllerAnimated(true)
     }
     
@@ -145,7 +135,7 @@ UINavigationControllerDelegate {
         let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(imageName)
         // 将图片写入文件
         imageData.writeToFile(fullPath, atomically: false)
-     }
+    }
     
     @objc private func onMore(){
         self.imagePickerController.delegate = self
@@ -167,9 +157,9 @@ UINavigationControllerDelegate {
     private func onMakeNavitem()->UINavigationItem{
         let navigationItem = UINavigationItem()
         let backBtn = UIBarButtonItem(title: "ㄑBack", style: .Plain,
-                                      target: self, action: #selector(AvatarPresentViewController.onCancel))
+                                      target: self, action: #selector(AddBookPhotoPickerViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
-        let rightBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(AvatarPresentViewController.onMore))
+        let rightBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(AddBookPhotoPickerViewController.onMore))
         rightBtn.tintColor = UIColor.whiteColor()
         navigationItem.title = "PHOTO"
         navigationItem.setLeftBarButtonItem(backBtn, animated: true)

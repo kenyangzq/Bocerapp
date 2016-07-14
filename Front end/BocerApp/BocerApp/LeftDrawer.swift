@@ -123,8 +123,12 @@ class LeftDrawer: UIViewController {
     }
 //    @IBAction func historyBtnFired(sender: UIButton) {
 //    }
-//    @IBAction func saleBtnFired(sender: UIButton) {
-//    }
+    @IBAction func saleBtnFired(sender: UIButton) {
+        
+        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+        let vc = sb.instantiateViewControllerWithIdentifier("AddBookViewController") as UIViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 //    @IBAction func buyBtnFired(sender: UIButton) {
 //    }
 

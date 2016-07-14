@@ -145,6 +145,10 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         emailTF.resignFirstResponder()
         phoneTF.resignFirstResponder()
         phoneTF.text?.adjustPhoneNumber()
+        firstNameTF.animateViewsForTextDisplay()
+        lastNameTF.animateViewsForTextDisplay()
+        emailTF.animateViewsForTextDisplay()
+        phoneTF.animateViewsForTextDisplay()
     }
     
     @IBAction func viewClicked(sender: AnyObject) {
@@ -167,18 +171,22 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         resignFirstResponder()
         switch textField {
         case firstNameTF:
+            firstNameTF.animateViewsForTextDisplay()
             firstName = firstNameTF.text
             lastNameTF.becomeFirstResponder()
             break
         case lastNameTF:
+            lastNameTF.animateViewsForTextDisplay()
             lastName = lastNameTF.text
             emailTF.becomeFirstResponder()
             break
         case emailTF:
+            emailTF.animateViewsForTextDisplay()
             email = emailTF.text
             phoneTF.becomeFirstResponder()
             break
         case phoneTF:
+            phoneTF.animateViewsForTextDisplay()
             phoneNumber = phoneTF.text
             phoneTF.text?.adjustPhoneNumber()
 //            nextBtnPerformed()
