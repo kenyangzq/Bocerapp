@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     private var firstName: String?
     private var lastName: String?
     private var newPassword: String?
-    private var imageString: String?
+    private var imageString: String = ""
     private let personalInfo = UserInfo()
     private var base = baseClass()
     private var userInfo = UserInfo()
@@ -271,12 +271,11 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     
     private func nextBtnPerformed() {
         email = emailTF.text
-        newPassword = resetPasswordTF.text!
+        newPassword = resetPasswordTF.text!.md5()
         firstName = firstNameTF.text
         lastName = lastNameTF.text
         print("email is \(email)\n newPassword is \(newPassword) \n firstname is \(firstName)\n is lastName is \(lastName)")
         if (checkValidation(firstName, last: lastName, email: email, password: newPassword)) {
-            newPassword = newPassword?.md5()
             personalInfo.setEmail(email!)
             personalInfo.setPassword(newPassword!)
             
@@ -311,6 +310,7 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
     }
     
     private func requestUserBasicInfo() {
+        userInfo.setEmail(email!)
         let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\"}",email!)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
@@ -415,17 +415,21 @@ class SignUpViewController: UIViewController, UITableViewDelegate, UITextFieldDe
                 
                 print("Server downs when trying to get user basic info\n")
             } else {
-                firstName = backmsg.objectForKey("firstName") as! String?
-                lastName = backmsg.objectForKey("lastName") as! String?
-                let temp = backmsg.objectForKey("profileImage")
-                if ((temp?.isEqual(NSNull)) != nil)  {
-                    imageString = nil
+                print("\(backmsg)")
+                let bodydata = backmsg.objectForKey("body") as! NSDictionary
+                print("body data is \(bodydata)")
+                firstName = bodydata["firstname"] as! NSString as String
+                lastName = bodydata["lastname"] as! NSString as String
+                let temp = bodydata["profileImage"] as! NSString? as String?
+                print("\(firstName)")
+                if (temp == nil)  {
+                    imageString = ""
                 } else {
-                    imageString = backmsg.objectForKey("profileImage") as! String?
+                    imageString = temp!
                 }
                 //TODO: 进入主界面
                 userInfo.setName(firstName!, mLast: lastName!)
-                userInfo.setImageString(imageString!)
+                userInfo.setImageString(imageString)
                 
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let vc = appDelegate.drawerViewController

@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
+class ProfileSettingViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet private weak var photoIV: UIImageView!
+//    @IBOutlet private weak var photoIV: UIImageView!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
     @IBOutlet private weak var changePhotoBtn: UIButton!
     @IBOutlet private weak var firstNameTF: MinoruTextField!
     @IBOutlet private weak var lastNameTF: MinoruTextField!
@@ -24,6 +25,12 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
     private var lastName: String?
     private var email: String?
     private var phoneNumber: String?
+    private let imagePickerController = UIImagePickerController()
+    private let smallAvatarImage = "/smallAvatarImage"
+    private var isFullScreen = false
+    private let imageConvertion = UIImageConvertion()
+    private var dataChunk = NSMutableData()
+    private var imagebody = NSData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,10 +162,81 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         resignKeyboards()
     }
     
+    private func cancelHandler(alert: UIAlertAction!) {
+        self.presentedViewController?.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    private func takePhotoHandler(alert: UIAlertAction!) {
+        if UIImagePickerController.isSourceTypeAvailable(.Camera){
+            //设置代理
+            imagePickerController.delegate = self
+            //设置来源
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            //允许编辑
+            imagePickerController.allowsEditing = true
+            //打开相机
+            self.presentViewController(self.imagePickerController, animated: true, completion: { () -> Void in
+            })
+        }else{
+            print("找不到相机")
+        }
+    }
+    
+    private func choosePhotoHandler(alert: UIAlertAction!) {
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.imagePickerController.navigationBar.barTintColor = UIColor(red: 0, green: 128/255, blue: 128/255, alpha: 1)
+        let navTitleAttribute: NSDictionary = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.imagePickerController.navigationBar.titleTextAttributes = navTitleAttribute as? [String: AnyObject]
+        self.imagePickerController.navigationBar.tintColor = UIColor.whiteColor()
+        self.presentViewController(self.imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.allowsEditing = true
+        var image: UIImage!
+        if picker.allowsEditing {
+            image = info[UIImagePickerControllerEditedImage] as! UIImage
+        } else {
+            image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        }
+        /* 此处info 有六个值
+         * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
+         * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片
+         * UIImagePickerControllerEditedImage;    // a UIImage 裁剪后图片
+         * UIImagePickerControllerCropRect;       // an NSValue (CGRect)
+         * UIImagePickerControllerMediaURL;       // an NSURL
+         * UIImagePickerControllerReferenceURL    // an NSURL that references an asset in the AssetsLibrary framework
+         * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
+         */
+        uploadAvatar(userInfo.getEmail()!,image: image)
+//        self.saveImage(image, newSize: CGSize(width: 150, height: 150), percent: 0.5, imageName: smallAvatarImage)
+//        
+//        let savedImage: UIImage = UIImage(contentsOfFile: someConstants.fullAvatarPath)!
+//        self.isFullScreen = false
+//        avatarIV.image = savedImage
+//        let smallImageConvertion = imageConvertion.imageToString(UIImage(contentsOfFile: someConstants.smallAvatarPath)!)
+
+//        print("small pic string is \(smallImageConvertion)")
+        //在这里调用网络通讯方法，上传头像至服务器...
+        
+    }
+    
     @IBAction func changePhotoFired(sender: UIButton) {
-        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
-        let vc = sb.instantiateViewControllerWithIdentifier("AvatarPresentViewController") as UIViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let sb = UIStoryboard(name: "MainInterface", bundle: nil);
+//        let vc = sb.instantiateViewControllerWithIdentifier("AvatarPresentViewController") as UIViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.imagePickerController.delegate = self
+        self.imagePickerController.allowsEditing = true
+        let alertController = UIAlertController(title: nil, message: nil,
+                                                preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelHandler)
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default, handler: takePhotoHandler)
+        let choosePhotoAction = UIAlertAction(title: "Choose from Photos", style: .Default, handler: choosePhotoHandler)
+        alertController.addAction(cancelAction)
+        alertController.addAction(takePhotoAction)
+        alertController.addAction(choosePhotoAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -261,6 +339,144 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         let rect = CGRectMake(0.0, 0,width,height);
         self.view.frame = rect
     }
+    
+    private func uploadAvatar(username:String, image: UIImage) {
+        let newSize = CGSize(width: 150, height: 150)
+        imagebody = compressImage(image, newSize: newSize, percent: 0.5)
+        let imageString = imagebody.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        print("imagestring is \(imageString)")
+        let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"imagebody\":\"%@\"}",username,imageString)
+        let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
+        let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
+        let path = usefulConstants().domainAddress + "/addUserSmallImage"
+        let url = NSURL(string: path)
+        print("login request address: \(path)\n")
+        let request = NSMutableURLRequest()
+        request.URL = url
+        request.HTTPMethod = "POST"
+        request.setValue(dataLength as String, forHTTPHeaderField: "Content-Length")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = sent
+        indicator.alpha = 1
+        indicator.startAnimating()
+        
+        let conn = NSURLConnection(request: request, delegate: self, startImmediately: true)
+
+        if (conn == nil) {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Connection Failure.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+
+    }
+    
+    
+    //压缩图片
+    func compressImage(currentImage: UIImage, newSize: CGSize, percent: CGFloat) -> NSData{
+        //压缩图片尺寸
+        UIGraphicsBeginImageContext(newSize)
+        currentImage.drawInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //高保真压缩图片质量
+        //UIImageJPEGRepresentation此方法可将图片压缩，但是图片质量基本不变，第二个参数即图片质量参数。
+        let imageData: NSData = UIImageJPEGRepresentation(newImage, percent)!
+//        print("\(imageData)")
+//        let imageNSString = NSString(data: imageData, encoding: NSUTF8StringEncoding)
+//        print("\(imageNSString)")
+//        let imageString = imageNSString as! String
+//        print("\(imageString)")
+        return imageData
+        //        // 获取沙盒目录,这里将图片放在沙盒的documents文件夹中
+        //        let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(imageName)
+        //        // 将图片写入文件
+        //        imageData.writeToFile(fullPath, atomically: false)
+    }
+    
+    //保存图片
+    func saveImage(currentImage: UIImage, newSize: CGSize, percent: CGFloat, imageName: String){
+        //压缩图片尺寸
+        UIGraphicsBeginImageContext(newSize)
+        currentImage.drawInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //高保真压缩图片质量
+        //UIImageJPEGRepresentation此方法可将图片压缩，但是图片质量基本不变，第二个参数即图片质量参数。
+        let imageData: NSData = UIImageJPEGRepresentation(newImage, percent)!
+        // 获取沙盒目录,这里将图片放在沙盒的documents文件夹中
+        let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(imageName)
+        // 将图片写入文件
+        imageData.writeToFile(fullPath, atomically: false)
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        dataChunk = NSMutableData()
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        dataChunk.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        print("datachunk is \(dataChunk)")
+        let backmsg: AnyObject! = try! NSJSONSerialization.JSONObjectWithData(dataChunk, options: NSJSONReadingOptions(rawValue: 0))
+        let targetAction = backmsg.objectForKey("Target Action") as! String?
+        let content = backmsg.objectForKey("content") as! String?
+        indicator.stopAnimating()
+        indicator.alpha = 0
+        
+        print("back message is \(backmsg)")
+        //普通登录
+        if targetAction == "addusersmallimageresult" {
+            if content == "success" {
+                //更改头像，保存头像
+                avatarIV.image = UIImage(data: imagebody)
+                saveImage(avatarIV.image!, newSize: CGSize(width: 150,height: 150), percent: 1, imageName: smallAvatarImage)
+                print("upload avatar success\n")
+            }
+            else if content == "system error" {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Connection Failure", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                print("Change avatar failed")
+            } else {
+                let alertController = UIAlertController(title: "Warning",
+                                                        message: "Connection Failure.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                print("connection fails when trying email login")
+            }
+        } else {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Server Issues.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            print("unexpected server issues\n")
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        NSLog("%@", error)
+        indicator.stopAnimating()
+        indicator.alpha = 0
+        let alertController = UIAlertController(title: "Warning",
+                                                message: "Connection Failure.", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        NSLog("connection failed")
+        
+    }
+
     /*
     // MARK: - Navigation
 

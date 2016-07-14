@@ -10,7 +10,6 @@ import UIKit
 
 class LeftDrawer: UIViewController {
 
-    @IBOutlet private weak var addPhotoBtn: UIButton!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var editInfoBtn: UIButton!
     @IBOutlet private weak var emailLabel: UILabel!
@@ -33,15 +32,16 @@ class LeftDrawer: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        avatarIV.layer.cornerRadius = 50
+        avatarIV.layer.masksToBounds = true
         // Customize button & label attributions
         self.view.backgroundColor = UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0)
-        addPhotoBtn.layer.cornerRadius = 50
-        addPhotoBtn.layer.borderColor = UIColor.whiteColor().CGColor
         editInfoBtn.layer.cornerRadius = 30
         historyBtn.layer.cornerRadius = 30
         saleBtn.layer.cornerRadius = 30
         buyBtn.layer.cornerRadius = 30
         nameLabel.adjustsFontSizeToFitWidth = true
+        avatarIV.backgroundColor = .blackColor()
         
         //add swipe gesture recognizer
         swipeRec = UISwipeGestureRecognizer(target: self, action: #selector(LeftDrawer.swipeView(_:)))
@@ -72,6 +72,7 @@ class LeftDrawer: UIViewController {
         //TODO:本地数据库建立？
 
         avatarLocalString = userInfo.getImageString()
+        print("avatar string is \(avatarLocalString)")
         var avatarImage: UIImage? = nil
         if avatarLocalString == nil {
             avatarImage = UIImage(contentsOfFile: someConstants.smallAvatarPath)
@@ -80,9 +81,7 @@ class LeftDrawer: UIViewController {
         }
         if avatarImage != nil {
             avatarIV.image = avatarImage
-            avatarIV.layer.cornerRadius = 50
-            addPhotoBtn.setTitle(nil, forState: .Normal)
-            addPhotoBtn.backgroundColor = UIColor(white: 1, alpha: 0)
+            print("avatarImage != nil")
         }
         (firstName, lastName) = userInfo.getName()
         email = userInfo.getEmail()
