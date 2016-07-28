@@ -343,9 +343,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate, UIIma
     private func uploadAvatar(username:String, image: UIImage) {
         let newSize = CGSize(width: 150, height: 150)
         imagebody = compressImage(image, newSize: newSize, percent: 0.5)
-        let imageString = imagebody.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-        print("imagestring is \(imageString)")
-        let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"imagebody\":\"%@\"}",username,imageString)
+        let dataString = NSString.localizedStringWithFormat("{\"username\":\"%@\",\"imagebody\":\"%@\"}",username,imagebody)
         let sent = NSData(data: dataString.dataUsingEncoding(NSASCIIStringEncoding)!)
         let dataLength = NSString.localizedStringWithFormat("%ld", sent.length)
         let path = usefulConstants().domainAddress + "/addUserSmallImage"
@@ -382,7 +380,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate, UIIma
         UIGraphicsEndImageContext()
         //高保真压缩图片质量
         //UIImageJPEGRepresentation此方法可将图片压缩，但是图片质量基本不变，第二个参数即图片质量参数。
-        let imageData: NSData = UIImageJPEGRepresentation(newImage, percent)!
+        let imageData: NSData = UIImagePNGRepresentation(newImage)!
 //        print("\(imageData)")
 //        let imageNSString = NSString(data: imageData, encoding: NSUTF8StringEncoding)
 //        print("\(imageNSString)")
@@ -404,7 +402,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate, UIIma
         UIGraphicsEndImageContext()
         //高保真压缩图片质量
         //UIImageJPEGRepresentation此方法可将图片压缩，但是图片质量基本不变，第二个参数即图片质量参数。
-        let imageData: NSData = UIImageJPEGRepresentation(newImage, percent)!
+        let imageData: NSData = UIImagePNGRepresentation(newImage)!
         // 获取沙盒目录,这里将图片放在沙盒的documents文件夹中
         let fullPath: String = NSHomeDirectory().stringByAppendingString("/Documents").stringByAppendingString(imageName)
         // 将图片写入文件

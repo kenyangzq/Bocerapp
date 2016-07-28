@@ -334,7 +334,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Gqc-Of-8G2">
-                                <rect key="frame" x="0.0" y="450" width="203" height="61"/>
+                                <rect key="frame" x="0.0" y="450" width="213" height="61"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cI-N0-Bwq">
                                         <rect key="frame" x="0.0" y="0.0" width="61" height="61"/>
@@ -360,16 +360,10 @@
                                         </variation>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GuA-1g-2WB">
-                                        <rect key="frame" x="71" y="0.0" width="61" height="61"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="105" y="0.0" width="90" height="90"/>
-                                        </variation>
+                                        <rect key="frame" x="76" y="0.0" width="61" height="61"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lub-zD-7I4">
-                                        <rect key="frame" x="142" y="0.0" width="61" height="61"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="210" y="0.0" width="90" height="90"/>
-                                        </variation>
+                                        <rect key="frame" x="152" y="0.0" width="61" height="61"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>

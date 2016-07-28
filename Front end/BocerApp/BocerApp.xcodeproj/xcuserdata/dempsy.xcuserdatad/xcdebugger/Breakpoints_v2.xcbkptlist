@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BocerApp/ProfileSettingViewController.swift"
-            timestampString = "490195272.631853"
+            timestampString = "491196783.76259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
             landmarkName = "connectionDidFinishLoading(_:)"
             landmarkType = "5">
          </BreakpointContent>

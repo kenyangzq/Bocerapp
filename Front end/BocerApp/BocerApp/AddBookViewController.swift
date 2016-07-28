@@ -84,21 +84,19 @@ class AddBookViewController: UIViewController, UITextFieldDelegate, ChangeBookIm
         let backBtn = UIBarButtonItem(title: "ㄑBack", style: .Plain,
                                       target: self, action: #selector(AddBookViewController.onCancel))
         backBtn.tintColor = UIColor.whiteColor()
-//        let doneBtn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ProfileSettingViewController.onDone))
-//        doneBtn.tintColor = UIColor.whiteColor()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(AddBookViewController.onDone))
+        doneBtn.tintColor = UIColor.whiteColor()
         let mNavItem = UINavigationItem()
         mNavItem.title = "ADD BOOK"
         mNavItem.setLeftBarButtonItem(backBtn, animated: true)
-//        mNavItem.setRightBarButtonItem(doneBtn, animated: true)
+        mNavItem.setRightBarButtonItem(doneBtn, animated: true)
         return mNavItem
     }
     
-//    @objc private func onDone() {
-//        userInfo.setEmail(email!)
-//        userInfo.setName(firstName!, mLast: lastName!)
-//        userInfo.setPhoneNumber(phoneNumber!)
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
+    @objc private func onDone() {
+
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     @objc private func onCancel() {
         self.navigationController?.popViewControllerAnimated(true)
