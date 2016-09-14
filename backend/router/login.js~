@@ -1,0 +1,18 @@
+var express = require('express');
+var router = express.Router();
+var auth = require('../datamodel/auth');
+
+
+router.post('/addUser',function(req,res){
+    var username = req.body.username;
+    var passwd = req.body.passwd;
+    var date = new Date();
+
+    var userinfo = auth({
+	username:username,
+	passwd:passwd,
+	createdate:date
+    });
+
+    userinfo.save(function(err))
+})
