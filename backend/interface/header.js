@@ -53,16 +53,18 @@ var back_msg = {
     'content':['success','system error'] //need to check the number of success got.
 };
 
-//add book path should be: bocerbook.com/addBook
+
 var bookinfo = {
-    'username':username,
-    'bookname':bookname,
+    'user':usern,
+    'title':title,
     'ISBN':ISBN,
     'author':author,
     'edition':edition,
     'className':className,
     'price':price,
-    'imagenum':imagenum
+    'school':school,
+    'smallImage': smallImages, 
+    'largeImage': largeImages
 };
 
 var back_msg = {
